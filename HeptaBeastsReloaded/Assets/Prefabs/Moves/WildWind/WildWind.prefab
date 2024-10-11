@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4176414129360914643
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4176414129360914645}
+  - component: {fileID: -2089290712904017181}
+  m_Layer: 0
+  m_Name: WildWind
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4176414129360914645
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4176414129360914643}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.108534, y: 114.07291, z: 144.53912}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-2089290712904017181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4176414129360914643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a88d54ebe202e1e4f9856c408b93cc3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  user: {fileID: 0}
+  cast: 0
+  lockPointer: 0
+  bName: Wild Wind
+  description: 
+  sprite: {fileID: 21300000, guid: 107a98adb14e3294b9d2de0a800f5423, type: 3}
+  cd: 10
+  element: 5
+  type: 2
+  anim: Special
+  moveObject: {fileID: 3214125622143865836, guid: b149bbf47c7c0014fb94efb69ecb74dd, type: 3}
+  reducedCdTime: 2
+  duration: 3
+  statsToChange:
+    mHp: 0
+    hp: 0
+    healthRegen: 0
+    shield: 0
+    strength: 0
+    sinergy: 0
+    atSpd: 0
+    control: 0
+    cdr: 0
+    fResist: 0
+    mResist: 0
+    spd: 22.5
+  area: 9
