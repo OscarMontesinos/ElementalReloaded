@@ -6,6 +6,7 @@ using UnityEngine;
 [Serializable]
 public class Stats
 {
+    public int lvl;
     public float mHp;
     [HideInInspector]
     public float hp;

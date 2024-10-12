@@ -11,35 +11,29 @@ public class WindBarrage : Move
     public float spd;
     public float spdOverTime;
     public float area;
-    public float range;
     public float angle;
 
 
     public override void Trigger()
     {
         base.Trigger();
-        float dmg;
-        if (type == PjBase.AttackType.Physical)
-        {
-            dmg = user.CalculateStrength(this.dmg);
-        }
-        else
-        {
-            dmg = user.CalculateSinergy(this.dmg);
-        }
 
-        Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(user.transform.position, range, GameManager.Instance.enemyLayer);
+        Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(user.transform.position, range, GameManager.Instance.unitLayer);
         PjBase enemy;
         List<PjBase> targets = new List<PjBase>();
         foreach (Collider2D enemyColl in enemiesHit)
         {
-            Transform target = enemyColl.transform;
-            Vector2 dir = target.position - user.transform.position;
-
-            if (Vector3.Angle(user.pointer.transform.up, dir.normalized) < angle / 2 && !Physics2D.Raycast(user.transform.position, dir, dir.magnitude, GameManager.Instance.wallLayer))
+            enemy = enemyColl.GetComponent<PjBase>();
+            if (enemy.team != user.team)
             {
-                enemy = enemyColl.GetComponent<PjBase>();
-                targets.Add(enemy);
+                Transform target = enemy.transform;
+                Vector2 dir = target.position - user.transform.position;
+
+                if (Vector3.Angle(user.pointer.transform.up, dir.normalized) < angle / 2 && !Physics2D.Raycast(user.transform.position, dir, dir.magnitude, GameManager.Instance.wallLayer))
+                {
+                    targets.Add(enemy);
+
+                }
             }
         }
         if (targets.Count > 0)
@@ -48,7 +42,7 @@ public class WindBarrage : Move
         }
         else
         {
-            if(user.currentMove1 == this)
+            if (user.currentMove1 == this)
             {
                 user.currentHab1Cd = 1.5f;
             }
@@ -65,6 +59,17 @@ public class WindBarrage : Move
 
     IEnumerator Shoot(List<PjBase> targets)
     {
+        float dmg;
+        if (type == PjBase.AttackType.Physical)
+        {
+            dmg = user.CalculateStrength(this.dmg);
+        }
+        else
+        {
+            dmg = user.CalculateSinergy(this.dmg);
+        }
+
+
         int lastTarget=100;
         int bursts = this.bursts;
         while (bursts > 0)

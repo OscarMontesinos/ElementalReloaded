@@ -47,7 +47,7 @@ MonoBehaviour:
   user: {fileID: 0}
   cast: 1
   lockPointer: 1
-  bName: Wind Barrage
+  mName: Wind Barrage
   description: 
   sprite: {fileID: 0}
   cd: 8
@@ -55,11 +55,11 @@ MonoBehaviour:
   type: 1
   anim: Burst
   moveObject: {fileID: 3214125622143865836, guid: 50e9f9717d3831f40a1dfae92e868695, type: 3}
+  range: 20
   bursts: 8
   burstsDelay: 0.055
   dmg: 10
   spd: 2
   spdOverTime: 60
   area: 5
-  range: 20
   angle: 55

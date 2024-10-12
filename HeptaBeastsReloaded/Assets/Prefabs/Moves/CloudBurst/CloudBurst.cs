@@ -6,7 +6,6 @@ public class CloudBurst : Move
 {
     public float dmg;
     public float spd;
-    public float range;
 
 
     public override void Trigger()

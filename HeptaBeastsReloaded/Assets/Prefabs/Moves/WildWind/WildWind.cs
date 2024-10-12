@@ -7,7 +7,6 @@ public class WildWind : Move
     public float reducedCdTime;
     public float duration;
     public Stats statsToChange;
-    public float area;
 
 
     public override void Trigger()
@@ -24,15 +23,18 @@ public class WildWind : Move
         statsToChange.mResist += user.CalculateControl(this.statsToChange.mResist);
         statsToChange.spd += user.stats.control/ this.statsToChange.spd;
 
-        Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(user.transform.position, area, GameManager.Instance.allyLayer);
+        Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(user.transform.position, range, GameManager.Instance.unitLayer);
         PjBase ally;
         foreach (Collider2D enemyColl in enemiesHit)
         {
             ally = enemyColl.GetComponent<PjBase>();
-            ally.gameObject.AddComponent<Buff>().NormalSetUp(user,ally, statsToChange, duration,null);
-            ally.currentHab1Cd -= reducedCdTime;
-            ally.currentHab2Cd -= reducedCdTime;
-            ally.currentHab3Cd -= reducedCdTime;
+            if (ally.team == user.team)
+            {
+                ally.gameObject.AddComponent<Buff>().NormalSetUp(user, ally, statsToChange, duration, null);
+                ally.currentHab1Cd -= reducedCdTime;
+                ally.currentHab2Cd -= reducedCdTime;
+                ally.currentHab3Cd -= reducedCdTime;
+            }
         }
 
         Instantiate(moveObject, user.transform.position, new Quaternion(0, 0, 0, 0));

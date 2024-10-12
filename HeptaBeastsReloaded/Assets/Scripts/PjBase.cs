@@ -25,6 +25,7 @@ public class PjBase : MonoBehaviour, TakeDamage
     [HideInInspector]
     public bool lockPointer;
     public GameObject pointer;
+    public GameObject cursor;
     public HitData.Element element1;
     public HitData.Element element2;
     public GameObject spinObjects;
@@ -83,6 +84,13 @@ public class PjBase : MonoBehaviour, TakeDamage
         controller = GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        stats.mHp = (int)(Mathf.Lerp(stats.mHp * 0.35f, stats.mHp * 6, stats.lvl * (0.01f / 3)) * 3);
+        stats.strength = (int)Mathf.Lerp(stats.strength * 0.35f, stats.strength * 6, stats.lvl * (0.01f / 3));
+        stats.sinergy = (int)Mathf.Lerp(stats.sinergy * 0.35f, stats.sinergy * 6, stats.lvl * (0.01f / 3));
+        stats.control = (int)Mathf.Lerp(stats.control * 0.35f, stats.control * 6, stats.lvl * (0.01f / 3));
+        stats.fResist = (int)Mathf.Lerp(stats.fResist * 0.35f, stats.fResist * 6, stats.lvl * (0.01f / 3));
+        stats.mResist = (int)Mathf.Lerp(stats.mResist * 0.35f, stats.mResist * 6, stats.lvl * (0.01f / 3));
     }
     public virtual void Start()
     {
@@ -212,9 +220,9 @@ public class PjBase : MonoBehaviour, TakeDamage
         if (currentBasicCd <= 0 && !casting)
         {
             currentBasicCd = CalculateAtSpd(currentMoveBasic.cd * stats.atSpd);
-            controller.lockPointer = false;
+            lockPointer = false;
             yield return null;
-            controller.lockPointer = true;
+            lockPointer = true;
             StartCoroutine(PlayAnimation(currentMoveBasic.anim));
             currentMoveBasic.Trigger();
         }
@@ -224,7 +232,7 @@ public class PjBase : MonoBehaviour, TakeDamage
     {
         if (currentHab1Cd <= 0 && !casting)
         {
-            controller.lockPointer = false;
+            lockPointer = false;
             if (currentMove1.cast)
             {
                 casting = true;
@@ -232,7 +240,7 @@ public class PjBase : MonoBehaviour, TakeDamage
             yield return null;
             if (currentMove1.lockPointer)
             {
-                controller.lockPointer = true;
+                lockPointer = true;
             }
             StartCoroutine(PlayAnimation(currentMove1.anim));
             currentHab1Cd = CDR(currentMove1.cd);
@@ -244,7 +252,7 @@ public class PjBase : MonoBehaviour, TakeDamage
     {
         if (currentHab2Cd <= 0 && !casting)
         {
-            controller.lockPointer = false;
+            lockPointer = false;
             if (currentMove2.cast)
             {
                 casting = true;
@@ -252,7 +260,7 @@ public class PjBase : MonoBehaviour, TakeDamage
             yield return null;
             if (currentMove2.lockPointer)
             {
-                controller.lockPointer = true;
+                lockPointer = true;
             }
             StartCoroutine(PlayAnimation(currentMove2.anim));
             currentHab2Cd = CDR(currentMove2.cd);
@@ -264,7 +272,7 @@ public class PjBase : MonoBehaviour, TakeDamage
     {
         if (currentHab3Cd <= 0 && !casting)
         {
-            controller.lockPointer = false;
+            lockPointer = false;
             if (currentMove3.cast)
             {
                 casting = true;
@@ -272,7 +280,7 @@ public class PjBase : MonoBehaviour, TakeDamage
             yield return null;
             if (currentMove3.lockPointer)
             {
-                controller.lockPointer = true;
+                lockPointer = true;
             }
             StartCoroutine(PlayAnimation(currentMove3.anim));
             currentHab3Cd = CDR(currentMove3.cd);
@@ -307,7 +315,7 @@ public class PjBase : MonoBehaviour, TakeDamage
     public virtual void AnimationCallStopAnim()
     {
         casting = false;
-        controller.lockPointer = false;
+        lockPointer = false;
     }
 
     public bool IsCasting()

@@ -59,16 +59,19 @@ public class DesertTornadoObject : MonoBehaviour
 
     void Tick()
     {
-        Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(transform.position, area, GameManager.Instance.enemyLayer);
+        Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(transform.position, area, GameManager.Instance.unitLayer);
         PjBase enemy;
         foreach (Collider2D enemyColl in enemiesHit)
         {
             enemy = enemyColl.GetComponent<PjBase>();
-            enemy.GetComponent<TakeDamage>().TakeDamage(user, dmgPerSecond, element, type);
+            if (enemy.team != user.team)
+            {
+                enemy.GetComponent<TakeDamage>().TakeDamage(user, dmgPerSecond * 0.4f, element, type);
 
-            Stats stats = new Stats();
-            stats.spd = user.stats.control / -slow;
-            enemy.gameObject.AddComponent<Buff>().NormalSetUp(user,enemy,stats,0.4f,null);
+                Stats stats = new Stats();
+                stats.spd = user.stats.control / -slow;
+                enemy.gameObject.AddComponent<Buff>().NormalSetUp(user, enemy, stats, 0.4f, null);
+            }
         }
     }
 

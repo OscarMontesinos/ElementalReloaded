@@ -12,6 +12,7 @@ public class Buff : MonoBehaviour
     [HideInInspector]
     public bool untimed;
     public Stats statsToChange;
+    float spdThreshold = 15;
     public GameObject particleFx;
 
     public void NormalSetUp(PjBase user, PjBase target, Stats statsToChange,float duration, GameObject particleFx)
@@ -31,32 +32,32 @@ public class Buff : MonoBehaviour
 
         if (this.statsToChange.spd > 0)
         {
-            if (this.statsToChange.spd <= user.stats.control / 10)
+            if (this.statsToChange.spd <= user.stats.control / spdThreshold)
             {
                 target.stats.spd += this.statsToChange.spd;
             }
             else
             {
-                this.statsToChange.spd = user.stats.control / 10;
+                this.statsToChange.spd = user.stats.control / spdThreshold;
                 target.stats.spd += this.statsToChange.spd;
             }
         }
         else if (this.statsToChange.spd < 0)
         {
-            if (this.statsToChange.spd <= user.stats.control / -10)
+            if (this.statsToChange.spd <= user.stats.control / -spdThreshold)
             {
                 target.stats.spd += this.statsToChange.spd;
             }
             else
             {
-                this.statsToChange.spd = user.stats.control / -10;
+                this.statsToChange.spd = user.stats.control / -spdThreshold;
                 target.stats.spd += this.statsToChange.spd;
             }
         }
 
         if (particleFx)
         {
-            this.particleFx = Instantiate(particleFx, target.transform);
+            this.particleFx = Instantiate(particleFx, target.visuals.transform);
         }
 
     }

@@ -47,7 +47,7 @@ MonoBehaviour:
   user: {fileID: 0}
   cast: 1
   lockPointer: 1
-  bName: AirPulse
+  mName: Air Pulse
   description: 
   sprite: {fileID: 0}
   cd: 1.25
@@ -55,6 +55,6 @@ MonoBehaviour:
   type: 1
   anim: Basic
   moveObject: {fileID: 3214125622143865836, guid: 2003d472ec5d1bd4694445630c6610bf, type: 3}
+  range: 20
   dmg: 22.5
   spd: 30
-  range: 20

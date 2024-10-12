@@ -58,6 +58,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        lockPointer = character.lockPointer;
+
         if (!Input.GetKey(KeyCode.Tab))
         {
             foreach (PjBase unit in GameManager.Instance.pjList)
@@ -196,6 +198,8 @@ public class PlayerController : MonoBehaviour
             Vector2 dir = UtilsClass.GetMouseWorldPosition() - character.pointer.transform.position;
             character.pointer.transform.up = dir;
         }
+
+        character.cursor.transform.position = UtilsClass.GetMouseWorldPosition();
     }
     void HandleCamera()
     {

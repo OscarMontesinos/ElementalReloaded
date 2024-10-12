@@ -7,7 +7,6 @@ public class DesertTornado : Move
 {
     public float dmgPerSecond;
     public float duration;
-    public float range;
     public float area;
     public float spd;
     public float slow;
@@ -24,7 +23,7 @@ public class DesertTornado : Move
             dmg = user.CalculateSinergy(dmgPerSecond);
         }
 
-        Vector3 destination = UtilsClass.GetMouseWorldPosition();
+        Vector3 destination = user.cursor.transform.position;
         Vector3 dist = destination - user.transform.position;
         if (dist.magnitude > range)
         {

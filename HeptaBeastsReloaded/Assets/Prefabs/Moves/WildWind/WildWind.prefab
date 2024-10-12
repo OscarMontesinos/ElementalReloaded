@@ -47,7 +47,7 @@ MonoBehaviour:
   user: {fileID: 0}
   cast: 0
   lockPointer: 0
-  bName: Wild Wind
+  mName: Wild Wind
   description: 
   sprite: {fileID: 21300000, guid: 107a98adb14e3294b9d2de0a800f5423, type: 3}
   cd: 10
@@ -55,6 +55,7 @@ MonoBehaviour:
   type: 2
   anim: Special
   moveObject: {fileID: 3214125622143865836, guid: b149bbf47c7c0014fb94efb69ecb74dd, type: 3}
+  range: 0
   reducedCdTime: 2
   duration: 3
   statsToChange:
@@ -70,4 +71,3 @@ MonoBehaviour:
     fResist: 0
     mResist: 0
     spd: 22.5
-  area: 9

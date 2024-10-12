@@ -15,7 +15,7 @@ public class DjinnEyeObject : MonoBehaviour
     float tickCounter = 1;
 
 
-    public void SetUp(PjBase user, HitData.Element element, PjBase.AttackType type,float area, float maxArea,float duration, float dmgPerSecond)
+    public void SetUp(PjBase user, HitData.Element element, PjBase.AttackType type,float area, float maxArea,float minArea,float duration, float dmgPerSecond)
     {
         this.user = user;
         this.element = element;
@@ -24,11 +24,19 @@ public class DjinnEyeObject : MonoBehaviour
         {
             area = maxArea;
         }
+        else if (area < minArea)
+        {
+            area = minArea;
+        }
         this.area = area;
         eye.transform.localScale = new Vector3(area, area, area);
         this.duration = duration;
         this.dmgPerSecond = dmgPerSecond;
         fov.viewDistance = area;
+        if(user.team != 0)
+        {
+            Destroy(fov);
+        }
     }
 
     private void Update()
@@ -77,12 +85,15 @@ public class DjinnEyeObject : MonoBehaviour
 
     void Tick()
     {
-        Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(transform.position, area, GameManager.Instance.enemyLayer);
+        Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(transform.position, area, GameManager.Instance.unitLayer);
         PjBase enemy;
         foreach (Collider2D enemyColl in enemiesHit)
         {
             enemy = enemyColl.GetComponent<PjBase>();
-            enemy.GetComponent<TakeDamage>().TakeDamage(user, dmgPerSecond, element, type);
+            if (enemy.team != user.team)
+            {
+                enemy.GetComponent<TakeDamage>().TakeDamage(user, dmgPerSecond, element, type);
+            }
         }
     }
 

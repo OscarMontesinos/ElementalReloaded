@@ -47,7 +47,7 @@ MonoBehaviour:
   user: {fileID: 0}
   cast: 1
   lockPointer: 1
-  bName: DesertBreeze
+  mName: Desert Breeze
   description: 
   sprite: {fileID: 0}
   cd: 1
@@ -55,8 +55,8 @@ MonoBehaviour:
   type: 1
   anim: Basic
   moveObject: {fileID: 3214125622143865836, guid: 87ac1ab95aceb89459605d8d9210368b, type: 3}
+  range: 20
   bursts: 3
   burstsDelay: 0.1
-  dmg: 10
+  dmg: 15
   spd: 22.5
-  range: 20

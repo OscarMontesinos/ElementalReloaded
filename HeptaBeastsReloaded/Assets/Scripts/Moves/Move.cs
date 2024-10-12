@@ -16,6 +16,7 @@ public class Move : MonoBehaviour
     public PjBase.AttackType type;
     public string anim;
     public GameObject moveObject;
+    public float range;
 
     public virtual void Trigger()
     {

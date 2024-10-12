@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject baseController;
     public GameObject baseUIManager;
+    public List<GameObject> waypoints;
 
     public List<List<GameObject>> teams;
 
@@ -23,8 +24,7 @@ public class GameManager : MonoBehaviour
     public List<PjBase> pjList = new List<PjBase>();
 
     public LayerMask wallLayer;
-    public LayerMask allyLayer;
-    public LayerMask enemyLayer;
+    public LayerMask unitLayer;
     public LayerMask playerWallLayer;
 
     public GameObject damageText;

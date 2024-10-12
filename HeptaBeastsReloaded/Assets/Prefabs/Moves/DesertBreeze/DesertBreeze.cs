@@ -8,14 +8,19 @@ public class DesertBreeze : Move
     public float burstsDelay;
     public float dmg;
     public float spd;
-    public float range;
 
 
     public override void Trigger()
     {
         base.Trigger();
+
+        StartCoroutine(Shoot());
+    }
+
+    IEnumerator Shoot()
+    {
         float dmg;
-        if(type == PjBase.AttackType.Physical)
+        if (type == PjBase.AttackType.Physical)
         {
             dmg = user.CalculateStrength(this.dmg);
         }
@@ -24,11 +29,6 @@ public class DesertBreeze : Move
             dmg = user.CalculateSinergy(this.dmg);
         }
 
-        StartCoroutine(Shoot());
-    }
-
-    IEnumerator Shoot()
-    {
         int bursts = this.bursts;
         while (bursts > 0)
         {

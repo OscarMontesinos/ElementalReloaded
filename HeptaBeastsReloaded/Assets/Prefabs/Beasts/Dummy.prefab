@@ -115,10 +115,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dummy
       objectReference: {fileID: 0}
-    - target: {fileID: 7185100020070106109, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 7185100020070106110, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
       propertyPath: m_RootOrder
       value: 0

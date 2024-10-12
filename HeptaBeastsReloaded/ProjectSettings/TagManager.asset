@@ -15,8 +15,8 @@ TagManager:
   - Water
   - UI
   - Air
-  - Enemy
-  - Ally
+  - Unit
+  - 
   - FoV
   - Fog
   - 

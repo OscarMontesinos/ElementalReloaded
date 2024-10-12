@@ -47,7 +47,7 @@ MonoBehaviour:
   user: {fileID: 0}
   cast: 1
   lockPointer: 1
-  bName: Pebble Bullet
+  mName: Pebble Bullet
   description: 
   sprite: {fileID: 0}
   cd: 1.75
@@ -55,6 +55,6 @@ MonoBehaviour:
   type: 0
   anim: Basic
   moveObject: {fileID: 3214125622143865836, guid: b09c358dfe255d348a63d148cf5d5133, type: 3}
+  range: 20
   dmg: 22.5
   spd: 32.5
-  range: 20

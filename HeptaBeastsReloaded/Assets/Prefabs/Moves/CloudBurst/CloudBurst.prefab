@@ -47,7 +47,7 @@ MonoBehaviour:
   user: {fileID: 0}
   cast: 1
   lockPointer: 1
-  bName: Cloud Burst
+  mName: Cloud Burst
   description: 
   sprite: {fileID: 21300000, guid: a4281f79871acd440a86b7b54e6caf81, type: 3}
   cd: 5
@@ -55,6 +55,6 @@ MonoBehaviour:
   type: 1
   anim: Burst
   moveObject: {fileID: 3214125622143865836, guid: 27be8ec457126ae43bfb5730d928d6ee, type: 3}
+  range: 22.5
   dmg: 30
   spd: 45
-  range: 22.5

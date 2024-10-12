@@ -9,7 +9,6 @@ public class SandVeil : Move
 {
     public float duration;
     public Stats statsToChange;
-    public float range;
     public float spd;
     public GameObject particleFx;
 
@@ -35,27 +34,30 @@ public class SandVeil : Move
         }
 
 
-        Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(UtilsClass.GetMouseWorldPosition(), 6, GameManager.Instance.allyLayer);
+        Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(user.cursor.transform.position, 6, GameManager.Instance.unitLayer);
         PjBase ally;
         PjBase target = null;
         foreach (Collider2D enemyColl in enemiesHit)
         {
             ally = enemyColl.GetComponent<PjBase>();
-            Vector2 dir = ally.transform.position - user.transform.position;
-
-            if (dir.magnitude <= range && !Physics2D.Raycast(user.transform.position, dir, dir.magnitude, GameManager.Instance.wallLayer))
+            if (ally.team == user.team)
             {
-                if (target != null)
+                Vector2 dir = ally.transform.position - user.transform.position;
+
+                if (dir.magnitude <= range && !Physics2D.Raycast(user.transform.position, dir, dir.magnitude, GameManager.Instance.wallLayer))
                 {
-                    Vector2 targetDir = target.transform.position - user.transform.position;
-                    if (targetDir.magnitude > dir.magnitude)
+                    if (target != null)
+                    {
+                        Vector2 targetDir = target.transform.position - user.transform.position;
+                        if (targetDir.magnitude > dir.magnitude)
+                        {
+                            target = ally;
+                        }
+                    }
+                    else
                     {
                         target = ally;
                     }
-                }
-                else
-                {
-                    target = ally;
                 }
             }
         }
