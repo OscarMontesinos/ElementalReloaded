@@ -23,10 +23,6 @@ public class UIManager : MonoBehaviour
     {
     }
 
-    private void Start()
-    {
-        UpdateHabIndicatorsImages();
-    }
     private void Update()
     {
         if (ch != null)

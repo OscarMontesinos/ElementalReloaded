@@ -7,6 +7,8 @@ public class Projectile : MonoBehaviour
     [HideInInspector]
     public PjBase user;
     [HideInInspector]
+    public PjBase target;
+    [HideInInspector]
     public HitData.Element element;
     [HideInInspector]
     public PjBase.AttackType type;
@@ -36,7 +38,7 @@ public class Projectile : MonoBehaviour
         startPos = transform.position;
     }
 
-    public void NormalSetUp(PjBase user, HitData.Element element, PjBase.AttackType type, float dmg, float speed, float range)
+    public virtual void NormalSetUp(PjBase user, HitData.Element element, PjBase.AttackType type, float dmg, float speed, float range)
     {
         this.user = user;
         this.element = element;
@@ -49,6 +51,12 @@ public class Projectile : MonoBehaviour
     public virtual void Update()
     {
         speed += spdOverTime * Time.deltaTime;
+
+        if (target)
+        {
+            Vector2 dir = target.transform.position - transform.position;
+            transform.up = dir;
+        }
     }
     public virtual void FixedUpdate()
     {

@@ -12,28 +12,51 @@ public class Buff : MonoBehaviour
     [HideInInspector]
     public bool untimed;
     public Stats statsToChange;
+    public GameObject particleFx;
 
-    public void NormalSetUp(PjBase user, Stats statsToChange,float duration)
+    public void NormalSetUp(PjBase user, PjBase target, Stats statsToChange,float duration, GameObject particleFx)
     {
         this.user = user;
+        this.target = target;
         this.time = duration;
         this.statsToChange = statsToChange;
 
-        user.stats.strength += this.statsToChange.strength;
-        user.stats.sinergy += this.statsToChange.sinergy;
-        user.stats.control += this.statsToChange.control;
-        user.stats.atSpd += this.statsToChange.atSpd;
-        user.stats.cdr += this.statsToChange.cdr;
-        user.stats.fResist += this.statsToChange.fResist;
-        user.stats.mResist += this.statsToChange.mResist;
-        if (this.statsToChange.spd <= user.stats.control / 10)
+        target.stats.strength += this.statsToChange.strength;
+        target.stats.sinergy += this.statsToChange.sinergy;
+        target.stats.control += this.statsToChange.control;
+        target.stats.atSpd += this.statsToChange.atSpd;
+        target.stats.cdr += this.statsToChange.cdr;
+        target.stats.fResist += this.statsToChange.fResist;
+        target.stats.mResist += this.statsToChange.mResist;
+
+        if (this.statsToChange.spd > 0)
         {
-            user.stats.spd += this.statsToChange.spd;
+            if (this.statsToChange.spd <= user.stats.control / 10)
+            {
+                target.stats.spd += this.statsToChange.spd;
+            }
+            else
+            {
+                this.statsToChange.spd = user.stats.control / 10;
+                target.stats.spd += this.statsToChange.spd;
+            }
         }
-        else
+        else if (this.statsToChange.spd < 0)
         {
-            this.statsToChange.spd = user.stats.control / 10;
-            user.stats.spd += this.statsToChange.spd;
+            if (this.statsToChange.spd <= user.stats.control / -10)
+            {
+                target.stats.spd += this.statsToChange.spd;
+            }
+            else
+            {
+                this.statsToChange.spd = user.stats.control / -10;
+                target.stats.spd += this.statsToChange.spd;
+            }
+        }
+
+        if (particleFx)
+        {
+            this.particleFx = Instantiate(particleFx, target.transform);
         }
 
     }
@@ -53,14 +76,19 @@ public class Buff : MonoBehaviour
 
     public virtual void Die()
     {
-        user.stats.strength -= statsToChange.strength;
-        user.stats.sinergy -= statsToChange.sinergy;
-        user.stats.control -= statsToChange.control;
-        user.stats.atSpd -= statsToChange.atSpd;
-        user.stats.cdr -= statsToChange.cdr;
-        user.stats.fResist -= statsToChange.fResist;
-        user.stats.mResist -= statsToChange.mResist;
-        user.stats.spd -= statsToChange.spd;
+        if (particleFx)
+        {
+            Destroy(particleFx);
+        }
+
+        target.stats.strength -= statsToChange.strength;
+        target.stats.sinergy -= statsToChange.sinergy;
+        target.stats.control -= statsToChange.control;
+        target.stats.atSpd -= statsToChange.atSpd;
+        target.stats.cdr -= statsToChange.cdr;
+        target.stats.fResist -= statsToChange.fResist;
+        target.stats.mResist -= statsToChange.mResist;
+        target.stats.spd -= statsToChange.spd;
         Destroy(this);
     }
 }

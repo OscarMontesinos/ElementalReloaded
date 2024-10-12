@@ -57,6 +57,6 @@ MonoBehaviour:
   moveObject: {fileID: 3214125622143865836, guid: 87ac1ab95aceb89459605d8d9210368b, type: 3}
   bursts: 3
   burstsDelay: 0.1
-  dmg: 12.5
+  dmg: 10
   spd: 22.5
   range: 20

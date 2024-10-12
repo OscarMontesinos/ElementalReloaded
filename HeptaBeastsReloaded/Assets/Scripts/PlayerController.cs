@@ -38,6 +38,9 @@ public class PlayerController : MonoBehaviour
         Instantiate(GameManager.Instance.FoV, transform).GetComponent<FieldOfView>().team = character.team;
 
         StartCoroutine(PostStart());    
+
+        character.MoveSetUp();
+        character.UIManager.UpdateHabIndicatorsImages();
     }
     
     IEnumerator PostStart()

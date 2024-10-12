@@ -57,4 +57,4 @@ MonoBehaviour:
   moveObject: {fileID: 3214125622143865836, guid: 27be8ec457126ae43bfb5730d928d6ee, type: 3}
   dmg: 30
   spd: 45
-  range: 17.5
+  range: 22.5

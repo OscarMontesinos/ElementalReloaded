@@ -8,7 +8,7 @@ public class Move : MonoBehaviour
     public PjBase user;
     public bool cast = true;
     public bool lockPointer = true;
-    public string bName;
+    public string mName;
     public string description;
     public Sprite sprite;
     public float cd;

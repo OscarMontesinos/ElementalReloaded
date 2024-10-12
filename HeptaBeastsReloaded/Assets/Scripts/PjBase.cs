@@ -25,7 +25,7 @@ public class PjBase : MonoBehaviour, TakeDamage
     [HideInInspector]
     public bool lockPointer;
     public GameObject pointer;
-    public HitData.Element element;
+    public HitData.Element element1;
     public HitData.Element element2;
     public GameObject spinObjects;
     public Slider hpBar;
@@ -68,6 +68,7 @@ public class PjBase : MonoBehaviour, TakeDamage
     [HideInInspector]
     public float dmgDealed;
     public bool hide;
+    public bool invisible;
     public List<GameObject> revealedByList = new List<GameObject>();
     public GameObject visuals;
     float healCount;
@@ -82,27 +83,6 @@ public class PjBase : MonoBehaviour, TakeDamage
         controller = GetComponent<PlayerController>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-
-        if (moveBasic)
-        {
-            currentMoveBasic = Instantiate(moveBasic, moveContainer.transform).GetComponent<Move>();
-            currentMoveBasic.user = this;
-        }
-        if (move1)
-        {
-            currentMove1 = Instantiate(move1, moveContainer.transform).GetComponent<Move>();
-            currentMove1.user = this;
-        }
-        if (move2)
-        {
-            currentMove2 = Instantiate(move2, moveContainer.transform).GetComponent<Move>();
-            currentMove2.user = this;
-        }
-        if (move3)
-        {
-            currentMove3 = Instantiate(move3, moveContainer.transform).GetComponent<Move>();
-            currentMove3.user = this;
-        }
     }
     public virtual void Start()
     {
@@ -179,6 +159,30 @@ public class PjBase : MonoBehaviour, TakeDamage
             spinObjects.transform.rotation = pointer.transform.rotation;
         }
 
+    }
+
+    public void MoveSetUp()
+    {
+        if (moveBasic)
+        {
+            currentMoveBasic = Instantiate(moveBasic, moveContainer.transform).GetComponent<Move>();
+            currentMoveBasic.user = this;
+        }
+        if (move1)
+        {
+            currentMove1 = Instantiate(move1, moveContainer.transform).GetComponent<Move>();
+            currentMove1.user = this;
+        }
+        if (move2)
+        {
+            currentMove2 = Instantiate(move2, moveContainer.transform).GetComponent<Move>();
+            currentMove2.user = this;
+        }
+        if (move3)
+        {
+            currentMove3 = Instantiate(move3, moveContainer.transform).GetComponent<Move>();
+            currentMove3.user = this;
+        }
     }
 
     public virtual void RechargeHab1()
@@ -360,6 +364,19 @@ public class PjBase : MonoBehaviour, TakeDamage
         
     }
 
+    public static float[][] typesChart =
+   { //                       WAT GR    CR     TH   WI  ICE   NAT  FIR
+       /*Neutral*/ new float[]{ 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f,},
+       /*Wat*/ new float[]{ 0f, 0f, 0f, 0.3f, -0.3f, 0f, -0.3f, 0f, 0.3f},
+       /*Gro*/ new float[]{ 0f, 0f, 0f, -0.3f, 0f, 0.3f, 0.3f, -0.3f, 0f},
+       /*Cry*/ new float[]{ 0f, -0.3f, 0.3f, 0f, 0.3f, 0f, 0f, -0.3f, 0f},
+       /*Thu*/ new float[]{ 0f, 0.3f, 0f, -0.3f, 0f, 0.3f, 0f, 0f, -0.3f},
+       /*Win*/ new float[]{ 0f, 0f, -0.3f, 0f, -0.3f, 0f, 0f, 0.3f, 0.3f},
+       /*Ice*/ new float[]{ 0f, 0.3f, -0.3f, 0f, 0f, 0f, 0f, 0.3f, -0.3f },
+       /*Nat*/ new float[]{ 0f, 0f, 0.3f, 0.3f, 0f, -0.3f, -0.3f, 0f, 0f},
+       /*Fir*/ new float[]{ 0f, -0.3f, 0f, 0f, 0.3f, -0.3f, 0.3f, 0f, 0f}
+    };
+
     void TakeDamage.TakeDamage(PjBase user,float value, HitData.Element element, AttackType type)
     {
         TakeDmg(user, value, element, type);
@@ -405,6 +422,11 @@ public class PjBase : MonoBehaviour, TakeDamage
             }
         }
 
+        float effectivenessMultiplier = 1;
+        effectivenessMultiplier += typesChart[(int)element][(int)element1] + typesChart[(int)element][(int)element2];
+
+        value *= effectivenessMultiplier;
+
         if (type == AttackType.Magical)
         {
             calculo = stats.mResist;
@@ -448,7 +470,25 @@ public class PjBase : MonoBehaviour, TakeDamage
 
         if (dText != null)
         {
-            dText.damageText.text = (value + dmgCount).ToString("F0");
+            switch (effectivenessMultiplier)
+            {
+                case 0.4f:
+                    dText.damageText.text = (value + dmgCount).ToString("F0") + "VV";
+                    break;
+                case 0.7f:
+                    dText.damageText.text = (value + dmgCount).ToString("F0") + "V";
+                    break;
+                case 1:
+                    dText.damageText.text = (value + dmgCount).ToString("F0");
+                    break;
+                case 1.3f:
+                    dText.damageText.text = (value + dmgCount).ToString("F0") + "!";
+                    break;
+                case 1.6f:
+                    dText.damageText.text = (value + dmgCount).ToString("F0") + "!!";
+                    break;
+            }
+            dText.damageText.fontSize += 0.25f;
             dmgCount = 0;
         }
         else
@@ -610,6 +650,8 @@ public class PjBase : MonoBehaviour, TakeDamage
     }
     public virtual IEnumerator Dash(Vector2 direction, float speed, float range, bool ignoreWalls)
     {
+        PlayAnimation("Dash");
+
         if (GetComponent<NavMeshAgent>())
         {
             GetComponent<NavMeshAgent>().enabled = false;
@@ -653,6 +695,9 @@ public class PjBase : MonoBehaviour, TakeDamage
         {
             GetComponent<NavMeshAgent>().enabled = true;
         }
+
+
+        PlayAnimation("Idle");
     }
 
     public void AnimationCursorLock(int value)

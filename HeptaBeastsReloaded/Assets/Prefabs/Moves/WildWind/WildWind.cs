@@ -29,7 +29,7 @@ public class WildWind : Move
         foreach (Collider2D enemyColl in enemiesHit)
         {
             ally = enemyColl.GetComponent<PjBase>();
-            ally.gameObject.AddComponent<Buff>().NormalSetUp(user, statsToChange, duration);
+            ally.gameObject.AddComponent<Buff>().NormalSetUp(user,ally, statsToChange, duration,null);
             ally.currentHab1Cd -= reducedCdTime;
             ally.currentHab2Cd -= reducedCdTime;
             ally.currentHab3Cd -= reducedCdTime;

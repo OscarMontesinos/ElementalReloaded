@@ -52,19 +52,24 @@ public class DjinnEyeObject : MonoBehaviour
             Die();
         }
 
-
-        foreach (PjBase unit in GameManager.Instance.pjList)
+        if (duration > 0)
         {
-            if (unit != null && unit.team != user.team)
+            foreach (PjBase unit in GameManager.Instance.pjList)
             {
-                float dist = (unit.transform.position - transform.position).magnitude;
-                if(dist <= area)
+                if (unit != null && unit.team != user.team)
                 {
-                    unit.revealedByList.Add(gameObject);
-                }
-                else if (unit.revealedByList.Contains(gameObject))
-                {
-                    unit.revealedByList.Remove(gameObject);
+                    float dist = (unit.transform.position - transform.position).magnitude;
+                    if (dist <= area)
+                    {
+                        if (!unit.revealedByList.Contains(gameObject))
+                        {
+                            unit.revealedByList.Add(gameObject);
+                        }
+                    }
+                    else if (unit.revealedByList.Contains(gameObject))
+                    {
+                        unit.revealedByList.Remove(gameObject);
+                    }
                 }
             }
         }
@@ -88,6 +93,7 @@ public class DjinnEyeObject : MonoBehaviour
             if (unit != null && unit.revealedByList.Contains(gameObject))
             {
                 unit.revealedByList.Remove(gameObject);
+                
             }
         }
 
