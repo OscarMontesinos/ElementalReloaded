@@ -1,3 +1,4 @@
+using CodeMonkey.Utils;
 using Microsoft.Win32.SafeHandles;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ public class PjBase : MonoBehaviour, TakeDamage
     public int team;
     [HideInInspector]
     public bool lockPointer;
+    [HideInInspector]
+    public bool lookAtPointer;
     public GameObject pointer;
     public GameObject cursor;
     public HitData.Element element1;
@@ -159,6 +162,7 @@ public class PjBase : MonoBehaviour, TakeDamage
             currentBasicCd -= Time.deltaTime;
         }
 
+
         RechargeHab1();
 
         RechargeHab2();
@@ -224,6 +228,9 @@ public class PjBase : MonoBehaviour, TakeDamage
         {
             currentBasicCd = CalculateAtSpd(currentMoveBasic.cd * stats.atSpd);
             lockPointer = false;
+            lookAtPointer = true;
+            Vector2 dir = cursor.transform.position - pointer.transform.position;
+            pointer.transform.up = dir;
             yield return null;
             lockPointer = true;
             StartCoroutine(PlayAnimation(currentMoveBasic.anim));
@@ -240,6 +247,9 @@ public class PjBase : MonoBehaviour, TakeDamage
             {
                 casting = true;
             }
+            lookAtPointer = true;
+            Vector2 dir = cursor.transform.position - pointer.transform.position;
+            pointer.transform.up = dir;
             yield return null;
             if (currentMove1.lockPointer)
             {
@@ -260,6 +270,9 @@ public class PjBase : MonoBehaviour, TakeDamage
             {
                 casting = true;
             }
+            lookAtPointer = true;
+            Vector2 dir = cursor.transform.position - pointer.transform.position;
+            pointer.transform.up = dir;
             yield return null;
             if (currentMove2.lockPointer)
             {
@@ -280,6 +293,9 @@ public class PjBase : MonoBehaviour, TakeDamage
             {
                 casting = true;
             }
+            lookAtPointer = true;
+            Vector2 dir = cursor.transform.position - pointer.transform.position;
+            pointer.transform.up = dir;
             yield return null;
             if (currentMove3.lockPointer)
             {
@@ -319,6 +335,7 @@ public class PjBase : MonoBehaviour, TakeDamage
     {
         casting = false;
         lockPointer = false;
+        lookAtPointer = false;
     }
 
     public bool IsCasting()

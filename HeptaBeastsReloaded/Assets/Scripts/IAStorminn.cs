@@ -65,6 +65,7 @@ public class IAStorminn : IABase
             else if(enemiesOnSight.Count == 0)
             {
                 SetDestination(targetLastPosition);
+                yield return null;
                 while (targetLocked != null && !enemiesOnSight.Contains(targetLocked) && agent.remainingDistance > agentAcceptanceRadius)
                 {
                     CheckTargetsOnSight();

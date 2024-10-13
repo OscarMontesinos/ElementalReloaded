@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey.Utils;
 using UnityEngine.UI;
+using System.Reflection;
 
 public class PlayerController : MonoBehaviour
 {   
@@ -193,12 +194,18 @@ public class PlayerController : MonoBehaviour
 
     void HandlePointer()
     {
-        if (!lockPointer && Time.timeScale != 0)
+        if (character.lookAtPointer)
         {
-            Vector2 dir = UtilsClass.GetMouseWorldPosition() - character.pointer.transform.position;
-            character.pointer.transform.up = dir;
+            if (!lockPointer && Time.timeScale != 0)
+            {
+                Vector2 dir = UtilsClass.GetMouseWorldPosition() - character.pointer.transform.position;
+                character.pointer.transform.up = dir;
+            }
         }
-
+        else
+        {
+             character.pointer.transform.up = rb.velocity.normalized;
+        }
         character.cursor.transform.position = UtilsClass.GetMouseWorldPosition();
     }
     void HandleCamera()

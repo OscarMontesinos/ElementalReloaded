@@ -60,6 +60,6 @@ MonoBehaviour:
   burstsDelay: 0.055
   dmg: 10
   spd: 2
-  spdOverTime: 60
+  spdOverTime: 35
   area: 5
   angle: 55

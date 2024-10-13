@@ -91,6 +91,7 @@ public class IABase : MonoBehaviour
                 targetLastPosition = targetLocked.transform.position;
             }
         }
+
     }
 
     public void CheckTargetsOnSight()
