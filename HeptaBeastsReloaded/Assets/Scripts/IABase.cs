@@ -76,11 +76,20 @@ public class IABase : MonoBehaviour
     }
     private void Update()
     {
-        agent.speed = user.stats.spd;
-
+        if (user.stunTime <= 0)
+        {
+            agent.speed = user.stats.spd;
+        }
+        else
+        {
+            agent.speed = 0;
+        }
         if(enemiesOnSight.Contains(targetLocked))
         {
-            targetLastPosition = targetLocked.transform.position;
+            if (targetLocked != null)
+            {
+                targetLastPosition = targetLocked.transform.position;
+            }
         }
     }
 

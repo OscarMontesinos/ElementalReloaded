@@ -664,7 +664,7 @@ public class PjBase : MonoBehaviour, TakeDamage
     }
     public virtual IEnumerator Dash(Vector2 direction, float speed, float range, bool ignoreWalls)
     {
-        PlayAnimation("Dash");
+        StartCoroutine(PlayAnimation("Dash"));
 
         if (GetComponent<NavMeshAgent>())
         {
@@ -711,7 +711,8 @@ public class PjBase : MonoBehaviour, TakeDamage
         }
 
 
-        PlayAnimation("Idle");
+
+        StartCoroutine(PlayAnimation("Idle"));
     }
 
     public void AnimationCursorLock(int value)

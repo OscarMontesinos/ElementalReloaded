@@ -98,73 +98,75 @@ public class IAStorminn : IABase
     public override IEnumerator ChooseAttack(MoveInfo move)
     {
         yield return null;
-        PointTo(targetLocked);
-        switch (move.moveName)
+        if (user.stunTime <= 0)
         {
-            case "Desert Breeze":
-                UseAttack(move);
-                break;
-            case "Air Pulse":
-                UseAttack(move);
-                break;
-            case "Cloud Burst":
-                UseAttack(move);
-                break;
-            case "Desert Tornado":
-                UseAttack(move);
-                break;
-            case "Djinn Eye":
-                UseAttack(move);
-                break;
-            case "Wild Wind":
-                if ((user.currentHab1Cd > 0 && user.currentHab2Cd > 0) || (user.currentHab3Cd > 0 && user.currentHab2Cd > 0) || (user.currentHab1Cd > 0 && user.currentHab3Cd > 0))
-                {
+            PointTo(targetLocked);
+            switch (move.moveName)
+            {
+                case "Desert Breeze":
                     UseAttack(move);
-                }
-                break;
-            case "Wind Barrage":
-                UseAttack(move);
-                break;
-            case "Sand Veil":
-                if (!GetAttack(move).GetComponent<SandVeil>().currentBuff)
-                {
-                    PjBase target = null;
-                    foreach (PjBase ally in allies)
+                    break;
+                case "Air Pulse":
+                    UseAttack(move);
+                    break;
+                case "Cloud Burst":
+                    UseAttack(move);
+                    break;
+                case "Desert Tornado":
+                    UseAttack(move);
+                    break;
+                case "Djinn Eye":
+                    UseAttack(move);
+                    break;
+                case "Wild Wind":
+                    if ((user.currentHab1Cd > 0 && user.currentHab2Cd > 0) || (user.currentHab3Cd > 0 && user.currentHab2Cd > 0) || (user.currentHab1Cd > 0 && user.currentHab3Cd > 0))
                     {
-                        if(ally != null)
+                        UseAttack(move);
+                    }
+                    break;
+                case "Wind Barrage":
+                    UseAttack(move);
+                    break;
+                case "Sand Veil":
+                    if (!GetAttack(move).GetComponent<SandVeil>().currentBuff)
+                    {
+                        PjBase target = null;
+                        foreach (PjBase ally in allies)
                         {
-                            if(target != null)
+                            if (ally != null)
                             {
-                                if(target.stats.hp < ally.stats.hp)
+                                if (target != null)
+                                {
+                                    if (target.stats.hp < ally.stats.hp)
+                                    {
+                                        target = ally;
+                                    }
+                                }
+                                else
                                 {
                                     target = ally;
                                 }
                             }
                             else
                             {
-                                target = ally;
+                                target = user;
                             }
                         }
-                        else
-                        {
-                            target = user;
-                        }
-                    }
-                    SetDestination(target.transform.position);
-                    while (agent.remainingDistance > GetAttack(move).range - 1)
-                    {
                         SetDestination(target.transform.position);
+                        while (agent.remainingDistance > GetAttack(move).range - 1)
+                        {
+                            SetDestination(target.transform.position);
+                            PointTo(target);
+                            yield return null;
+                        }
                         PointTo(target);
                         yield return null;
+                        UseAttack(move);
                     }
-                    PointTo(target);
-                    yield return null;
-                    UseAttack(move);
-                }
-                break;
-        }
-
+                    break;
+            }
         yield return base.ChooseAttack(move);
+        }
     }
 
 }
