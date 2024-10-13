@@ -49,14 +49,16 @@ MonoBehaviour:
   lockPointer: 1
   mName: Sand Veil
   description: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: f924bd9c35165644898ed067b6dc6352, type: 3}
   cd: 5
   element: 0
   type: 0
   anim: Special
   moveObject: {fileID: 3214125622143865836, guid: 3f060c5eb7270b842b13c8f0bd54cf61, type: 3}
+  range: 15
   duration: 20
   statsToChange:
+    lvl: 0
     mHp: 0
     hp: 0
     healthRegen: 0
@@ -69,7 +71,6 @@ MonoBehaviour:
     fResist: 0
     mResist: 50
     spd: 0
-  range: 15
   spd: 25
   particleFx: {fileID: 8878432131878806945, guid: 21ce49ddabf615d49bea2a6ab1ea3904, type: 3}
   currentBuff: {fileID: 0}

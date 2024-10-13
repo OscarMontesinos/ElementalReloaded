@@ -21,12 +21,14 @@ public class IABase : MonoBehaviour
     [HideInInspector]
     public NavMeshAgent agent;
     [HideInInspector]
-    public float agentAcceptanceRadius = 0.5f;
+    public float agentAcceptanceRadius = 1.5f;
     public List<GameObject> availableBasicMoves;
     public List<GameObject> availableMoves;
 
     [HideInInspector]
     public List<PjBase> enemiesOnSight;
+    [HideInInspector]
+    public List<PjBase> allies;
     [HideInInspector]
     public PjBase targetLocked;
     [HideInInspector]
@@ -56,6 +58,22 @@ public class IABase : MonoBehaviour
         averageRange = (user.currentMoveBasic.range + user.currentMove1.range + user.currentMove2.range + user.currentMove3.range) / 4;
     }
 
+    public virtual void Start()
+    {
+        StartCoroutine(PostStart());
+    }
+
+    public virtual IEnumerator PostStart()
+    {
+        yield return null;
+        foreach (PjBase unit in GameManager.Instance.pjList)
+        {
+            if (unit != null && unit != this && unit.team == user.team)
+            {
+                allies.Add(unit);
+            }
+        }
+    }
     private void Update()
     {
         agent.speed = user.stats.spd;
@@ -63,11 +81,6 @@ public class IABase : MonoBehaviour
         if(enemiesOnSight.Contains(targetLocked))
         {
             targetLastPosition = targetLocked.transform.position;
-        }
-
-        if (!user.lockPointer)
-        {
-            PointTo(targetLocked);
         }
     }
 
@@ -178,11 +191,14 @@ public class IABase : MonoBehaviour
 
     public void PointTo(PjBase target)
     {
-        if (target != null)
+        if (!user.lockPointer)
         {
-            Vector2 dir = target.transform.position - transform.position;
-            user.pointer.transform.up = dir;
-            user.cursor.transform.position = target.transform.position;
+            if (target != null)
+            {
+                Vector2 dir = target.transform.position - transform.position;
+                user.pointer.transform.up = dir;
+                user.cursor.transform.position = target.transform.position;
+            }
         }
     }
 
@@ -209,5 +225,46 @@ public class IABase : MonoBehaviour
         return dest;
     }
 
+    public virtual IEnumerator ChooseAttack(MoveInfo randomMove)
+    {
+        yield return null;
+    }
+
+    public void UseAttack(MoveInfo move)
+    {
+        switch (move.moveSlot)
+        {
+            case 0:
+                StartCoroutine(user.MainAttack());
+                break;
+            case 1:
+                StartCoroutine(user.Hab1());
+                break;
+            case 2:
+                StartCoroutine(user.Hab2());
+                break;
+            case 3:
+                StartCoroutine(user.Hab3());
+                break;
+        }
+    }
+
+    public Move GetAttack(MoveInfo move)
+    {
+        switch (move.moveSlot)
+        {
+            case 0:
+                return user.currentMoveBasic;
+            case 1:
+                return user.currentMove1;
+            case 2:
+                return user.currentMove2;
+            case 3:
+                return user.currentMove3;
+            default:
+                return null;
+        }
+
+    }
 }
 

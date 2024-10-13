@@ -14,7 +14,7 @@ public class DesertTornadoObject : MonoBehaviour
     float dmgPerSecond;
     float tickCounter = 0.4f;
     float slow;
-
+    public bool active;
 
     private void Awake()
     {
@@ -35,26 +35,29 @@ public class DesertTornadoObject : MonoBehaviour
 
     private void Update()
     {
-        if (tickCounter > 0)
+        if (active)
         {
-            tickCounter -= Time.deltaTime;
-        }
-        else
-        {
-            tickCounter = 0.4f;
-            Tick();
-        }
+            if (tickCounter > 0)
+            {
+                tickCounter -= Time.deltaTime;
+            }
+            else
+            {
+                tickCounter = 0.4f;
+                Tick();
+            }
 
-        if (duration > 0)
-        {
-            duration -= Time.deltaTime;
+            if (duration > 0)
+            {
+                duration -= Time.deltaTime;
+            }
+            else
+            {
+                Die();
+            }
+
         }
-        else
-        {
-            Die();
-        }
-        
-        _rigidbody.velocity = transform.up.normalized *spd;
+            _rigidbody.velocity = transform.up.normalized * spd;
     }
 
     void Tick()

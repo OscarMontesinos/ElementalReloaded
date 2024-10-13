@@ -11,6 +11,7 @@ using static UnityEngine.Rendering.DebugUI;
 
 public class PjBase : MonoBehaviour, TakeDamage
 {
+    public bool walk;
     Rigidbody2D rb;
     public UIManager UIManager;
     [HideInInspector]
@@ -49,13 +50,10 @@ public class PjBase : MonoBehaviour, TakeDamage
     public float currentBasicCd;
     [HideInInspector]
     public float currentHab1Cd;
-    public float hab1Cd;
     [HideInInspector]
     public float currentHab2Cd;
-    public float hab2Cd;
     [HideInInspector]
     public float currentHab3Cd;
-    public float hab3Cd;
     [HideInInspector]
     public bool casting;
     [HideInInspector]
@@ -104,6 +102,11 @@ public class PjBase : MonoBehaviour, TakeDamage
     }
     public virtual void Update()
     {
+        if (walk)
+        {
+            animator.SetFloat("FrontVelocity", rb.velocity.magnitude);
+        }
+
         if(stats.hp < stats.mHp)
         {
             stats.hp += stats.healthRegen * Time.deltaTime;
@@ -607,7 +610,10 @@ public class PjBase : MonoBehaviour, TakeDamage
     }
     void TakeDamage.Stunn(float stunTime)
     {
-        this.stunTime += stunTime;
+        if (this.stunTime < stunTime)
+        {
+            this.stunTime = stunTime;
+        }
     }
     void TakeDamage.Die(PjBase killer)
     {

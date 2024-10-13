@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3214125622143865838}
   - component: {fileID: 7318779212467324183}
+  - component: {fileID: 8119491678695123142}
   m_Layer: 0
   m_Name: DjinnEyeObject
   m_TagString: Untagged
@@ -132,6 +133,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eye: {fileID: 5804717793168402410}
   fov: {fileID: 4812654378138536561}
+  active: 0
+--- !u!95 &8119491678695123142
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3214125622143865836}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 30a0b6b4fb31470479ca59aa1ae76feb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3214125622244284566
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,6 +329,10 @@ PrefabInstance:
     - target: {fileID: 15680838488341122, guid: 59016fa050b749949a070cc5c2391425, type: 3}
       propertyPath: m_Name
       value: FieldOfView
+      objectReference: {fileID: 0}
+    - target: {fileID: 15680838488341122, guid: 59016fa050b749949a070cc5c2391425, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59016fa050b749949a070cc5c2391425, type: 3}

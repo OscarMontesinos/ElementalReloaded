@@ -55,9 +55,9 @@ MonoBehaviour:
   type: 1
   anim: Special
   moveObject: {fileID: 3214125622143865836, guid: 73c7c2bc223d1af49bcbaae8d8fb5092, type: 3}
-  range: 5
-  dmgPerSecond: 15
+  range: 3
+  dmgPerSecond: 25
   duration: 4.5
-  area: 9
+  area: 8
   spd: 4
   slow: 30

@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 294446628592581817}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 18.249924, y: 18.249924, z: 25.347113}
+  m_LocalScale: {x: 16, y: 16, z: 16}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3214125622143865838}
@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 3828533431197322583}
   - component: {fileID: 8687890774860386737}
   - component: {fileID: -1571272080524910234}
+  - component: {fileID: 1568883443346931048}
   m_Layer: 0
   m_Name: DesertTornadoObject
   m_TagString: Untagged
@@ -132,6 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c02d0f170ea164c817d32e38b54878, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  active: 0
 --- !u!114 &8687890774860386737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69415830666298940b3c68c2568057cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  area: 9
+  area: 8
 --- !u!50 &-1571272080524910234
 Rigidbody2D:
   serializedVersion: 4
@@ -160,12 +162,32 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &1568883443346931048
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3214125622143865836}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 88c708ee315f9db458d2cc5c656ec447, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3483140788075004502
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,7 +238,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 1
+  prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -283,7 +305,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 7.32
+      scalar: 6.12
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -915,7 +937,7 @@ ParticleSystem:
     sphericalDirectionAmount: 1
     randomPositionAmount: 0
     radius:
-      value: 9.01
+      value: 7.96
       mode: 0
       spread: 0
       speed:

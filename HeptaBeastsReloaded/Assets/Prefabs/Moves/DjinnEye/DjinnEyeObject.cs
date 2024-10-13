@@ -13,6 +13,7 @@ public class DjinnEyeObject : MonoBehaviour
     float duration;
     float dmgPerSecond;
     float tickCounter = 1;
+    public bool active;
 
 
     public void SetUp(PjBase user, HitData.Element element, PjBase.AttackType type,float area, float maxArea,float minArea,float duration, float dmgPerSecond)
@@ -41,42 +42,45 @@ public class DjinnEyeObject : MonoBehaviour
 
     private void Update()
     {
-        if (tickCounter > 0)
+        if (active)
         {
-            tickCounter -= Time.deltaTime;
-        }
-        else
-        {
-            tickCounter = 1;
-            Tick();
-        }
-
-        if (duration > 0)
-        {
-            duration -= Time.deltaTime;
-        }
-        else
-        {
-            Die();
-        }
-
-        if (duration > 0)
-        {
-            foreach (PjBase unit in GameManager.Instance.pjList)
+            if (tickCounter > 0)
             {
-                if (unit != null && unit.team != user.team)
+                tickCounter -= Time.deltaTime;
+            }
+            else
+            {
+                tickCounter = 1;
+                Tick();
+            }
+
+            if (duration > 0)
+            {
+                duration -= Time.deltaTime;
+            }
+            else
+            {
+                Die();
+            }
+
+            if (duration > 0)
+            {
+                foreach (PjBase unit in GameManager.Instance.pjList)
                 {
-                    float dist = (unit.transform.position - transform.position).magnitude;
-                    if (dist <= area)
+                    if (unit != null && unit.team != user.team)
                     {
-                        if (!unit.revealedByList.Contains(gameObject))
+                        float dist = (unit.transform.position - transform.position).magnitude;
+                        if (dist <= area)
                         {
-                            unit.revealedByList.Add(gameObject);
+                            if (!unit.revealedByList.Contains(gameObject))
+                            {
+                                unit.revealedByList.Add(gameObject);
+                            }
                         }
-                    }
-                    else if (unit.revealedByList.Contains(gameObject))
-                    {
-                        unit.revealedByList.Remove(gameObject);
+                        else if (unit.revealedByList.Contains(gameObject))
+                        {
+                            unit.revealedByList.Remove(gameObject);
+                        }
                     }
                 }
             }
