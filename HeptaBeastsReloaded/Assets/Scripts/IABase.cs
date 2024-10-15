@@ -7,6 +7,7 @@ using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEditor.SceneManagement;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.TextCore.Text;
@@ -212,11 +213,28 @@ public class IABase : MonoBehaviour
         }
     }
 
+    public bool GetRemainingDistance(float range)
+    {
+        bool isInDistance = true;
+        if (!user.dashing)
+        {
+            if(agent.remainingDistance < range)
+            {
+                isInDistance = false;
+            }
+        }
+        return isInDistance;
+    }
+
     public void SetDestination(Vector2 pos)
     {
-        NavMeshHit hit;
-        NavMesh.SamplePosition(pos, out hit, 100, 1);
-        agent.SetDestination(hit.position);
+        if (!user.dashing)
+        {
+            NavMeshHit hit;
+            NavMesh.SamplePosition(pos, out hit, 100, 1);
+            agent.SetDestination(hit.position);
+            Debug.DrawLine(user.transform.position,hit.position);
+        }
     }
 
     public Vector2 PivotPos()

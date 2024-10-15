@@ -28,7 +28,7 @@ public class IAStorminn : IABase
             {
                 Vector2 dest = targetLocked.transform.position - ((targetLocked.transform.position - user.transform.position).normalized * (agentAcceptanceRadius - 1));
                 SetDestination(dest);
-                while (agent.remainingDistance > averageRange)
+                while (GetRemainingDistance(averageRange))
                 {
                     dest = targetLocked.transform.position - ((targetLocked.transform.position - user.transform.position).normalized * (agentAcceptanceRadius - 1));
                     SetDestination(dest);
@@ -39,9 +39,11 @@ public class IAStorminn : IABase
             }
             else
             {
-                SetDestination(PivotPos());
-                while (agent.remainingDistance > agentAcceptanceRadius)
+                Vector2 dir = PivotPos();
+                SetDestination(dir);
+                while (GetRemainingDistance(averageRange))
                 {
+                    SetDestination(dir);
                     yield return null;
                 }
                 yield return new WaitForSeconds(1);
@@ -154,7 +156,7 @@ public class IAStorminn : IABase
                             }
                         }
                         SetDestination(target.transform.position);
-                        while (agent.remainingDistance > GetAttack(move).range - 1)
+                        while (GetRemainingDistance(GetAttack(move).range - 1))
                         {
                             SetDestination(target.transform.position);
                             PointTo(target);

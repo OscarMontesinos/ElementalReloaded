@@ -59,7 +59,7 @@ MonoBehaviour:
   range: 14
   spd: 25
   dmg: 35
-  stunTime: 1.35
+  stunTime: 1
   area: 5
 --- !u!114 &3441505719318893826
 MonoBehaviour:

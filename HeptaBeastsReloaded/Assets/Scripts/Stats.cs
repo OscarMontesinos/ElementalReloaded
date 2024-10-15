@@ -19,7 +19,6 @@ public class Stats
     public float sinergy;
     public float atSpd;
     public float control;
-    [HideInInspector]
     public float cdr;
 
     public float fResist;

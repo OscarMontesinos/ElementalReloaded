@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   user: {fileID: 0}
-  cast: 1
+  cast: 0
   lockPointer: 1
+  resetAutoattack: 0
   mName: Blunt Blow
   description: 
   sprite: {fileID: 0}

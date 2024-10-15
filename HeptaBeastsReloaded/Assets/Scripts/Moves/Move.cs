@@ -8,6 +8,7 @@ public class Move : MonoBehaviour
     public PjBase user;
     public bool cast = true;
     public bool lockPointer = true;
+    public bool resetAutoattack;
     public string mName;
     public string description;
     public Sprite sprite;
@@ -20,7 +21,10 @@ public class Move : MonoBehaviour
 
     public virtual void Trigger()
     {
-
+        if (resetAutoattack)
+        {
+            user.currentBasicCd = 0;
+        }
     }
 
 }

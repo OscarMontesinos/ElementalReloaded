@@ -46,10 +46,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   user: {fileID: 0}
   cast: 0
-  lockPointer: 0
+  lockPointer: 1
+  resetAutoattack: 0
   mName: DisablingDischarge
   description: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: d6dad427bff5dd44baa40c0ac1701795, type: 3}
   cd: 9
   element: 7
   type: 1

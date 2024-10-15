@@ -5002,6 +5002,50 @@ PrefabInstance:
       propertyPath: stats.healthRegen
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: learnableMoves.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: learnableMoves.Array.data[6].lvl
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: learnableMoves.Array.data[0].move
+      value: 
+      objectReference: {fileID: 4176414129360914643, guid: 84c0afcc3996c0645824bffb9bc840ee, type: 3}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: learnableMoves.Array.data[1].move
+      value: 
+      objectReference: {fileID: 4176414129360914643, guid: 7416764ce61fb1a4196a0fa8efc48e15, type: 3}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: learnableMoves.Array.data[2].move
+      value: 
+      objectReference: {fileID: 4176414129360914643, guid: 8c4e114789144994e9b6fb45514f2a10, type: 3}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: learnableMoves.Array.data[3].move
+      value: 
+      objectReference: {fileID: 4176414129360914643, guid: e93424795ac6bc443b173db7364dbf4d, type: 3}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: learnableMoves.Array.data[4].move
+      value: 
+      objectReference: {fileID: 4176414129360914643, guid: 9e63b6ce549f1c24299917ca9787cfea, type: 3}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: learnableMoves.Array.data[5].move
+      value: 
+      objectReference: {fileID: 4176414129360914643, guid: f8e03834f94871446ad2a74f4710af90, type: 3}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: learnableMoves.Array.data[6].move
+      value: 
+      objectReference: {fileID: 4176414129360914643, guid: e8642603b39fefb428284cdd64357542, type: 3}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: learnableMoves.Array.data[7].move
+      value: 
+      objectReference: {fileID: 4176414129360914643, guid: 42bcbdc3d5930db4ca0d4fe0ab2fd68d, type: 3}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: learnableMoves.Array.data[8].move
+      value: 
+      objectReference: {fileID: 4176414129360914643, guid: 42bcbdc3d5930db4ca0d4fe0ab2fd68d, type: 3}
     - target: {fileID: 7185100020070106109, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
       propertyPath: m_Name
       value: Storminn

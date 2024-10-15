@@ -1,5 +1,6 @@
 using CodeMonkey.Utils;
 using Microsoft.Win32.SafeHandles;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,6 +10,7 @@ using UnityEngine.AI;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 using static UnityEngine.Rendering.DebugUI;
+using Random = UnityEngine.Random;
 
 public class PjBase : MonoBehaviour, TakeDamage
 {
@@ -36,6 +38,15 @@ public class PjBase : MonoBehaviour, TakeDamage
     public Slider hpBar;
     public Slider stunnBar;
     public Slider shieldBar;
+
+    [Serializable]
+    public struct LearnableMove
+    {
+        public GameObject move;
+        public int lvl;
+    }
+    public List<LearnableMove> learnableMoves;
+
     public GameObject moveContainer;
     public GameObject moveBasic;
     public GameObject move1;
@@ -677,10 +688,19 @@ public class PjBase : MonoBehaviour, TakeDamage
     public virtual IEnumerator Dash(Vector2 direction, float speed, float range)
     {
         yield return null;
-        StartCoroutine(Dash(direction, speed, range, false));
+        if (this != null)
+        {
+            StartCoroutine(Dash(direction, speed, range, false));
+        }
     }
     public virtual IEnumerator Dash(Vector2 direction, float speed, float range, bool ignoreWalls)
     {
+        if (dashing)
+        {
+            dashing = false;
+            yield return null;
+        }
+
         StartCoroutine(PlayAnimation("Dash"));
 
         if (GetComponent<NavMeshAgent>())

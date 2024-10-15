@@ -615,13 +615,45 @@ PrefabInstance:
       propertyPath: stats.healthRegen
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: learnableMoves.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: learnableMoves.Array.data[0].move
+      value: 
+      objectReference: {fileID: 4176414129360914643, guid: bb5adce19f7daaa4291f8015b7ef8af8, type: 3}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: learnableMoves.Array.data[1].move
+      value: 
+      objectReference: {fileID: 4176414129360914643, guid: 670dca6d1fec79146bd13df732db4342, type: 3}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: learnableMoves.Array.data[2].move
+      value: 
+      objectReference: {fileID: 4176414129360914643, guid: c7cd1ade33528d54da32b93d5e2818f6, type: 3}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: learnableMoves.Array.data[3].move
+      value: 
+      objectReference: {fileID: 4176414129360914643, guid: e757634dd5878e242a829777652d685e, type: 3}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: learnableMoves.Array.data[4].move
+      value: 
+      objectReference: {fileID: 4176414129360914643, guid: 894d503ec00c7f941b53dbdfa14a51e7, type: 3}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: learnableMoves.Array.data[5].move
+      value: 
+      objectReference: {fileID: 4176414129360914643, guid: acebd5b8d9416914daba708ee2f26acc, type: 3}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: learnableMoves.Array.data[6].move
+      value: 
+      objectReference: {fileID: 4176414129360914643, guid: ef1999f226577ef40beae6f3cabe7022, type: 3}
     - target: {fileID: 7185100020070105985, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
       propertyPath: m_Radius
       value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 7185100020070106109, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
       propertyPath: m_Name
-      value: Obe
+      value: ObeL
       objectReference: {fileID: 0}
     - target: {fileID: 7185100020070106110, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
       propertyPath: m_RootOrder

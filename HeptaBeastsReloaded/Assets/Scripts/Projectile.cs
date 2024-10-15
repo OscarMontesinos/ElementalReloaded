@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
@@ -8,6 +9,8 @@ public class Projectile : MonoBehaviour
     public PjBase user;
     [HideInInspector]
     public PjBase target;
+    [HideInInspector]
+    public bool lookAtTarget;
     [HideInInspector]
     public HitData.Element element;
     [HideInInspector]
@@ -52,10 +55,11 @@ public class Projectile : MonoBehaviour
     {
         speed += spdOverTime * Time.deltaTime;
 
-        if (target)
+        if (target && lookAtTarget)
         {
             Vector2 dir = target.transform.position - transform.position;
             transform.up = dir;
+            lookAtTarget = false;
         }
     }
     public virtual void FixedUpdate()
