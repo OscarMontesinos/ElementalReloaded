@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   user: {fileID: 0}
+  cursorAffecter: 0
   cast: 0
   lockPointer: 0
   resetAutoattack: 0
@@ -70,6 +71,6 @@ MonoBehaviour:
     control: 0
     fResist: 0
     mResist: 0
-    spd: 22.5
+    spd: 20
     atSpd: 0
     cdr: 0

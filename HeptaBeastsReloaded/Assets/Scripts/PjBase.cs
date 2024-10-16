@@ -103,6 +103,11 @@ public class PjBase : MonoBehaviour, TakeDamage
         stats.control = (int)Mathf.Lerp(stats.control * 0.35f, stats.control * 6, stats.lvl * (0.01f / 3));
         stats.fResist = (int)Mathf.Lerp(stats.fResist * 0.35f, stats.fResist * 6, stats.lvl * (0.01f / 3));
         stats.mResist = (int)Mathf.Lerp(stats.mResist * 0.35f, stats.mResist * 6, stats.lvl * (0.01f / 3));
+
+        if (team != 0)
+        {
+            hpBar.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = Color.red;
+        }
     }
     public virtual void Start()
     {
@@ -239,11 +244,19 @@ public class PjBase : MonoBehaviour, TakeDamage
         {
             currentBasicCd = CalculateAtSpd(currentMoveBasic.cd * stats.atSpd);
             lockPointer = false;
+            if (currentMoveBasic.cast)
+            {
+                casting = true;
+            }
             lookAtPointer = true;
             Vector2 dir = cursor.transform.position - pointer.transform.position;
             pointer.transform.up = dir;
             yield return null;
-            lockPointer = true;
+
+            if (currentMoveBasic.lockPointer)
+            {
+                lockPointer = true;
+            }
             StartCoroutine(PlayAnimation(currentMoveBasic.anim));
             currentMoveBasic.Trigger();
         }
@@ -253,6 +266,7 @@ public class PjBase : MonoBehaviour, TakeDamage
     {
         if (currentHab1Cd <= 0 && !casting)
         {
+            currentHab1Cd = CDR(currentMove1.cd);
             lockPointer = false;
             if (currentMove1.cast)
             {
@@ -267,7 +281,6 @@ public class PjBase : MonoBehaviour, TakeDamage
                 lockPointer = true;
             }
             StartCoroutine(PlayAnimation(currentMove1.anim));
-            currentHab1Cd = CDR(currentMove1.cd);
             currentMove1.Trigger();
         }
     }
@@ -276,6 +289,7 @@ public class PjBase : MonoBehaviour, TakeDamage
     {
         if (currentHab2Cd <= 0 && !casting)
         {
+            currentHab2Cd = CDR(currentMove2.cd);
             lockPointer = false;
             if (currentMove2.cast)
             {
@@ -290,7 +304,6 @@ public class PjBase : MonoBehaviour, TakeDamage
                 lockPointer = true;
             }
             StartCoroutine(PlayAnimation(currentMove2.anim));
-            currentHab2Cd = CDR(currentMove2.cd);
             currentMove2.Trigger();
         }
     }
@@ -299,6 +312,7 @@ public class PjBase : MonoBehaviour, TakeDamage
     {
         if (currentHab3Cd <= 0 && !casting)
         {
+            currentHab3Cd = CDR(currentMove3.cd);
             lockPointer = false;
             if (currentMove3.cast)
             {
@@ -313,7 +327,6 @@ public class PjBase : MonoBehaviour, TakeDamage
                 lockPointer = true;
             }
             StartCoroutine(PlayAnimation(currentMove3.anim));
-            currentHab3Cd = CDR(currentMove3.cd);
             currentMove3.Trigger();
         }
     }
@@ -660,6 +673,13 @@ public class PjBase : MonoBehaviour, TakeDamage
     void TakeDamage.Die(PjBase killer)
     {
         killer.OnKill(this);
+
+        GameManager.Instance.pjList.Remove(this);
+        if (GameManager.Instance.currentWave.Contains(gameObject))
+        {
+            GameManager.Instance.currentWave.Remove(gameObject);
+        }
+
         Destroy(gameObject);
     }
 
@@ -709,9 +729,10 @@ public class PjBase : MonoBehaviour, TakeDamage
     }
     public virtual IEnumerator Dash(Vector2 direction, float speed, float range, bool ignoreWalls, bool ignoreAir)
     {
-        if (dashing)
+        if (dashing || stunTime > 0)
         {
             dashing = false;
+            stunTime = 0;
             yield return null;
         }
 
@@ -777,6 +798,7 @@ public class PjBase : MonoBehaviour, TakeDamage
 
 
         StartCoroutine(PlayAnimation("Idle"));
+        AnimationCallStopAnim();
     }
 
     public void AnimationCursorLock(int value)

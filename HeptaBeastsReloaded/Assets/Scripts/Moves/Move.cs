@@ -6,6 +6,7 @@ public class Move : MonoBehaviour
 {
     [HideInInspector]
     public PjBase user;
+    public bool cursorAffecter;
     public bool cast = true;
     public bool lockPointer = true;
     public bool resetAutoattack;

@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey.Utils;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 using System.Reflection;
+using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
 {   
     [HideInInspector]
     public Vector2 inputMov;
+    Vector2 inputCursor;
     public Camera cam;
     public LayerMask wallLayer;
     float speedDecrease = 5;
@@ -19,6 +22,14 @@ public class PlayerController : MonoBehaviour
     public bool lockPointer;
     public GameObject targetBoss;
     float maxViewportDistance = 16;
+    public SpriteRenderer cursorSprite;
+
+    bool moveBasic;
+    bool move1;
+    bool move2;
+    bool move3;
+
+    float maxRange;
 
     public void LockPointer(bool value)
     {
@@ -27,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        cursorSprite.enabled = true;
         rb = character.GetComponent<Rigidbody2D>();
         cam = FindObjectOfType<Camera>();
         cam.transform.parent.GetComponent<CameraController>().playerController = this;
@@ -42,18 +54,25 @@ public class PlayerController : MonoBehaviour
 
         character.MoveSetUp();
         character.UIManager.UpdateHabIndicatorsImages();
+
+        maxRange = character.currentMoveBasic.range;
+        if (maxRange < character.currentMove1.range)
+        {
+            maxRange = character.currentMove1.range;
+        }
+        if (maxRange < character.currentMove2.range)
+        {
+            maxRange = character.currentMove2.range;
+        }
+        if (maxRange < character.currentMove3.range)
+        {
+            maxRange = character.currentMove3.range;
+        }
     }
     
     IEnumerator PostStart()
     {
         yield return null;
-        foreach (PjBase unit in GameManager.Instance.pjList)
-        {
-            if (unit.team != character.team)
-            {
-                unit.hpBar.transform.GetChild(1).GetChild(0).GetComponent<Image>().color = Color.red;
-            }
-        }
     }
 
     // Update is called once per frame
@@ -121,7 +140,7 @@ public class PlayerController : MonoBehaviour
             {
                 HandlePointer();
 
-                HandleMovement();
+                //HandleMovement();
             }
 
             HandleCamera();
@@ -194,7 +213,7 @@ public class PlayerController : MonoBehaviour
 
     void HandlePointer()
     {
-        if (character.lookAtPointer)
+        /*if (character.lookAtPointer)
         {
             if (!lockPointer && Time.timeScale != 0)
             {
@@ -202,11 +221,64 @@ public class PlayerController : MonoBehaviour
                 character.pointer.transform.up = dir;
             }
         }
-        else if(rb.velocity.magnitude > 1)
+        else*/ if(rb.velocity.magnitude > 1 && !character.lookAtPointer)
         {
              character.pointer.transform.up = rb.velocity.normalized;
         }
-        character.cursor.transform.position = UtilsClass.GetMouseWorldPosition();
+        //character.cursor.transform.position = UtilsClass.GetMouseWorldPosition();
+
+        character.cursor.transform.position = (Vector2)character.transform.position + (inputCursor * maxRange);
+        if(inputCursor.magnitude == 0)
+        {
+            character.cursor.transform.position = character.cursor.transform.position + (character.pointer.transform.up * 1.5f);
+        }
+
+        Vector2 dir = character.cursor.transform.position - character.transform.position;
+
+        RaycastHit2D[] ray = Physics2D.CircleCastAll((Vector2)character.transform.position + (dir.normalized*6), 6, dir.normalized, maxRange-6, GameManager.Instance.unitLayer, -10, 100);
+
+        PjBase target = null;
+        int times = 0;
+
+        foreach (RaycastHit2D rayHit in ray)
+        {
+            if (target == null || target == character)
+            {
+                target = rayHit.collider.GetComponent<PjBase>();
+                if (target == character || target.hide)
+                {
+                    target = null;
+                }
+            }
+            else if (target != null)
+            {
+                Vector2 dist = target.transform.position - character.transform.position;
+
+                PjBase targetbackUp = target;
+                PjBase target2 = rayHit.collider.GetComponent<PjBase>();
+                Vector2 dist2 = target2.transform.position - character.transform.position;
+
+                if (!target2.hide)
+                {
+                    if (dist2.magnitude < dist.magnitude)
+                    {
+                        target = target2;
+                    }
+
+
+                    if (target == character)
+                    {
+                        target = targetbackUp;
+                    }
+                }
+            }
+            times++;
+        }
+
+        if (target != null && target != character)
+        {
+            character.cursor.transform.position = target.transform.position;
+        }
     }
     void HandleCamera()
     {
@@ -229,28 +301,47 @@ public class PlayerController : MonoBehaviour
          }*/
     }
 
+    public void BasicMove(InputAction.CallbackContext ctx)
+    {
+        moveBasic = ctx.action.triggered;
+    }
+    public void Move1(InputAction.CallbackContext ctx)
+    {
+        move1 = ctx.action.triggered;
+    }
+    public void Move2(InputAction.CallbackContext ctx)
+    {
+        move2 = ctx.action.triggered;
+    }
+    public void Move3(InputAction.CallbackContext ctx)
+    {
+        move3 = ctx.action.triggered;
+    }
     void HandleHabilities()
     {
         if (character.stunTime <= 0)
         {
-            if (Input.GetMouseButton(0))
+            if (moveBasic)
             {
                 StartCoroutine(character.MainAttack());
             }
-            if (Input.GetMouseButton(1))
+            if (move1)
             {
                 StartCoroutine(character.Hab1());
             }
-            if (Input.GetKeyDown(KeyCode.Q))
+            if (move2)
             {
                 StartCoroutine(character.Hab2());
             }
-            if (Input.GetKeyDown(KeyCode.E))
+            if (move3)
             {
                 StartCoroutine(character.Hab3());
             }
         }
     }
+
+    public void OnMove(InputAction.CallbackContext ctx) => inputMov = ctx.ReadValue<Vector2>();
+    public void OnCursor(InputAction.CallbackContext ctx) => inputCursor = ctx.ReadValue<Vector2>();
 
     void HandleMovement()
     {

@@ -34,6 +34,9 @@ public class ElectricShot : Move
         while (bursts > 0)
         {
             yield return new WaitForSeconds(burstDelay);
+            Vector2 dir = user.cursor.transform.position - user.pointer.transform.position;
+            user.pointer.transform.up = dir;
+            yield return null;
             Projectile bullet = Instantiate(moveObject, user.transform.position, user.pointer.transform.rotation).GetComponent<Projectile>();
             bullet.NormalSetUp(user, element, type, dmg, spd, range);
             bullet.transform.eulerAngles = new Vector3(0, 0, bullet.transform.localEulerAngles.z +  detour);
@@ -42,6 +45,9 @@ public class ElectricShot : Move
             if (bursts > 0)
             {
                 yield return new WaitForSeconds(burstDelay);
+                dir = user.cursor.transform.position - user.pointer.transform.position;
+                user.pointer.transform.up = dir;
+                yield return null;
                 bullet = Instantiate(moveObject, user.transform.position, user.pointer.transform.rotation).GetComponent<Projectile>();
                 bullet.NormalSetUp(user, element, type, dmg, spd, range);
                 bullet.transform.eulerAngles = new Vector3(0, 0, bullet.transform.localEulerAngles.z - detour);

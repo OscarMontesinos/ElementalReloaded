@@ -140,18 +140,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8074388029933743270, guid: 4ef6d3bf10df1a441923a4d1588e66f9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8074388029933743270, guid: 4ef6d3bf10df1a441923a4d1588e66f9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8074388029933743270, guid: 4ef6d3bf10df1a441923a4d1588e66f9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8074388029933743270, guid: 4ef6d3bf10df1a441923a4d1588e66f9, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
@@ -205,7 +193,7 @@ PrefabInstance:
       objectReference: {fileID: 4176414129360914643, guid: 6c2add9d06c73c140880cfe043448a69, type: 3}
     - target: {fileID: 8074388029933743320, guid: 4ef6d3bf10df1a441923a4d1588e66f9, type: 3}
       propertyPath: stats.lvl
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8074388029933743320, guid: 4ef6d3bf10df1a441923a4d1588e66f9, type: 3}
       propertyPath: controller
@@ -213,6 +201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8074388029933743271, guid: 4ef6d3bf10df1a441923a4d1588e66f9, type: 3}
+    - {fileID: 250987216616418399, guid: 4ef6d3bf10df1a441923a4d1588e66f9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4ef6d3bf10df1a441923a4d1588e66f9, type: 3}
 --- !u!1 &3067878427793984926 stripped
 GameObject:

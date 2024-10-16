@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   user: {fileID: 0}
+  cursorAffecter: 0
   cast: 1
   lockPointer: 1
   resetAutoattack: 0
@@ -57,5 +58,5 @@ MonoBehaviour:
   anim: Burst
   moveObject: {fileID: 3214125622143865836, guid: 27be8ec457126ae43bfb5730d928d6ee, type: 3}
   range: 22.5
-  dmg: 30
+  dmg: 50
   spd: 45

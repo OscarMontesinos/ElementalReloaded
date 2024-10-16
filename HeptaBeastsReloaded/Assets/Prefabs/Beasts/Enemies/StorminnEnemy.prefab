@@ -136,18 +136,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8074388029933743270, guid: 82954b91008afb24db079245a8aa8870, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8074388029933743270, guid: 82954b91008afb24db079245a8aa8870, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8074388029933743270, guid: 82954b91008afb24db079245a8aa8870, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8074388029933743270, guid: 82954b91008afb24db079245a8aa8870, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
@@ -185,6 +173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8074388029933743271, guid: 82954b91008afb24db079245a8aa8870, type: 3}
+    - {fileID: 250987216616418399, guid: 82954b91008afb24db079245a8aa8870, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 82954b91008afb24db079245a8aa8870, type: 3}
 --- !u!1 &8782423954374131972 stripped
 GameObject:
@@ -236,8 +225,8 @@ MonoBehaviour:
   - {fileID: 4176414129360914643, guid: e8642603b39fefb428284cdd64357542, type: 3}
   - {fileID: 4176414129360914643, guid: 9e63b6ce549f1c24299917ca9787cfea, type: 3}
   - {fileID: 4176414129360914643, guid: e93424795ac6bc443b173db7364dbf4d, type: 3}
-  - {fileID: 4176414129360914643, guid: 42bcbdc3d5930db4ca0d4fe0ab2fd68d, type: 3}
   - {fileID: 4176414129360914643, guid: f8e03834f94871446ad2a74f4710af90, type: 3}
+  - {fileID: 4176414129360914643, guid: 2a6930230cfaf7347874d9433d93167f, type: 3}
   enemiesOnSight: []
   allies: []
   targetLocked: {fileID: 0}

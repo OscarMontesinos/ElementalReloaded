@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   user: {fileID: 0}
+  cursorAffecter: 1
   cast: 0
   lockPointer: 1
   resetAutoattack: 0

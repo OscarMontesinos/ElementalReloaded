@@ -84,7 +84,7 @@ public class IABase : MonoBehaviour
     {
         if (user.stunTime <= 0)
         {
-            agent.speed = user.stats.spd;
+            agent.speed = user.stats.spd - 0.4F;
         }
         else
         {
@@ -179,7 +179,7 @@ public class IABase : MonoBehaviour
         else
         {
             SetDestination(GameManager.Instance.waypoints[Random.Range(0, GameManager.Instance.waypoints.Count)].transform.position);
-            while (agent.remainingDistance > agentAcceptanceRadius && enemiesOnSight.Count == 0)
+            while (GetRemainingDistance(agentAcceptanceRadius) && enemiesOnSight.Count == 0)
             {
                 CheckTargetsOnSight();
                 yield return null;

@@ -35,7 +35,7 @@ public class IAStorminn : IABase
                     UseAttack(move);
                     break;
                 case "Desert Tornado":
-                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 1));
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range + 6));
                     UseAttack(move);
                     break;
                 case "Djinn Eye":
@@ -48,7 +48,7 @@ public class IAStorminn : IABase
                         UseAttack(move);
                     }
                     break;
-                case "Wind Barrage":
+                case "Sand Blast":
                     yield return StartCoroutine(GetOnRange(GetAttack(move).range - 1));
                     UseAttack(move);
                     break;

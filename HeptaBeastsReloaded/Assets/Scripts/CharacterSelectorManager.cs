@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class CharacterSelectorManager : MonoBehaviour
 {
-    public void Close()
-    {
-        GameManager.Instance.CloseSelector();
-    }
+
 }

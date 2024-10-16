@@ -101,7 +101,7 @@ public class IAObe : IABase
                             }
                         }
                         SetDestination(target2.transform.position);
-                        while (GetRemainingDistance(GetAttack(move).range - 1))
+                        while (GetRemainingDistance(GetAttack(move).range - 1) && target2 != null)
                         {
                             SetDestination(target2.transform.position);
                             PointTo(target2);
@@ -160,7 +160,7 @@ public class IAObe : IABase
                             }
                         }
                         SetDestination(target2.transform.position);
-                        while (GetRemainingDistance(GetAttack(move).range - 1))
+                        while (GetRemainingDistance(GetAttack(move).range - 1) && target2 != null)
                         {
                             SetDestination(target2.transform.position);
                             PointTo(target2);

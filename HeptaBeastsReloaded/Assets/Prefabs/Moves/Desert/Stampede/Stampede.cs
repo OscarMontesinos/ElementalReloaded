@@ -9,7 +9,7 @@ public class Stampede : Move
     public float stunTime;
     public float area;
 
-
+    public GameObject areaShower;
     public override void Trigger()
     {
         base.Trigger();
@@ -38,6 +38,7 @@ public class Stampede : Move
             yield return null;
         }
 
+        areaShower.SetActive(true);
         List<PjBase> targetsAffected = new List<PjBase>();
         while (user.dashing)
         {
@@ -55,6 +56,8 @@ public class Stampede : Move
             }
             yield return null;
         }
+
+        areaShower.SetActive(false);
 
         user.AnimationCallStopAnim();
         particle.transform.parent = null;

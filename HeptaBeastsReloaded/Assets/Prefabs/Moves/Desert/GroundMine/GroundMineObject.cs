@@ -77,6 +77,11 @@ public class GroundMineObject : MonoBehaviour
 
     IEnumerator Tick()
     {
+        if(move == null)
+        {
+            Die();
+        }
+
         if(user.currentMove1 == move)
         {
             user.currentHab1Cd = user.CDR(move.cd);

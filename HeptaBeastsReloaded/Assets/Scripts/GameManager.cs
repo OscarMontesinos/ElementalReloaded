@@ -1,9 +1,10 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using UnityEngine.TextCore.Text;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -44,6 +45,19 @@ public class GameManager : MonoBehaviour
 
     public float ingameSpeed;
 
+    public bool spawn;
+    public GameObject waveSpawner;
+
+    [Serializable]
+    public struct Wave
+    {
+        public List<GameObject> enemies;
+    }
+
+    public List<Wave> waves;
+    [HideInInspector]
+    public List<GameObject> currentWave;
+
     public enum GameModes
     {
         singleplayer, multiplayer
@@ -64,32 +78,38 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = ingameSpeed;
+
+        if (spawn)
+        {
+            foreach (GameObject unit in waves[Random.Range(0,waves.Count)].enemies)
+            {
+                GameObject enemy = Instantiate(unit, waveSpawner.transform.position, waveSpawner.transform.rotation);
+                currentWave.Add(enemy);
+            }
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
 
-    }
+        if (currentWave.Count == 0 && spawn)
+        {
+            foreach (PjBase unit in pjList)
+            {
+                if (unit != null)
+                {
+                    unit.Heal(unit, unit.stats.mHp * 0.5f, unit.element1);
+                }
+            }
 
-    public IEnumerator StartGame()
-    {
-        ingame = true;
+            foreach (GameObject unit in waves[Random.Range(0, waves.Count)].enemies)
+            {
+                GameObject enemy = Instantiate(unit, waveSpawner.transform.position, waveSpawner.transform.rotation);
+                currentWave.Add(enemy);
+            }
+        }
 
-        Instantiate(baseController);
-        Instantiate(baseUIManager);
-
-        yield return null;
-
-    }
-
-    public void OpenSelector()
-    {
-        SceneManager.LoadSceneAsync("CharacterSelector", LoadSceneMode.Additive);
-    }
-    public void CloseSelector()
-    {
-        SceneManager.UnloadSceneAsync("CharacterSelector");
     }
 
     public static Vector2 DirectionFromAngle(float eulerY, float angleInDegrees)
