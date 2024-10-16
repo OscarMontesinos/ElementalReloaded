@@ -6,6 +6,16 @@ public class Shield : Buff
 {
     public float shieldAmount;
 
+    public void ShieldSetUp(PjBase user,PjBase target, float shieldAmount, float duration, GameObject particleFx)
+    {
+        this.user = user;
+        this.target = target;
+        ChangeShieldAmount(shieldAmount);
+        this.duration = duration;
+        this.particleFx = particleFx;
+
+    }
+
     public virtual float ChangeShieldAmount(float value)
     {
         if (value >= -shieldAmount)
@@ -36,8 +46,15 @@ public class Shield : Buff
 
     public override void Die()
     {
+        if (particleFx)
+        {
+            Destroy(particleFx);
+        }
+
         user.RegisterDamage(-shieldAmount);
         ChangeShieldAmount(-shieldAmount);
-        base.Die();
+
+
+        Destroy(this);
     }
 }

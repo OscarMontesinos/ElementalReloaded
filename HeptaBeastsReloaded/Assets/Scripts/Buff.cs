@@ -8,18 +8,18 @@ public class Buff : MonoBehaviour
     public PjBase user;
     [HideInInspector]
     public PjBase target;
-    public float time;
+    public float duration;
     [HideInInspector]
     public bool untimed;
     public Stats statsToChange;
     float spdThreshold = 15;
     public GameObject particleFx;
 
-    public void NormalSetUp(PjBase user, PjBase target, Stats statsToChange,float duration, GameObject particleFx)
+    public virtual void NormalSetUp(PjBase user, PjBase target, Stats statsToChange,float duration, GameObject particleFx)
     {
         this.user = user;
         this.target = target;
-        this.time = duration;
+        this.duration = duration;
         this.statsToChange = statsToChange;
 
         target.stats.strength += this.statsToChange.strength;
@@ -67,8 +67,8 @@ public class Buff : MonoBehaviour
     {
         if (!untimed)
         {
-            time -= Time.deltaTime;
-            if (time <= 0)
+            duration -= Time.deltaTime;
+            if (duration <= 0)
             {
                 Die();
             }

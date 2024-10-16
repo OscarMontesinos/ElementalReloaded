@@ -507,7 +507,7 @@ public class PjBase : MonoBehaviour, TakeDamage
                 Shield chosenShield = null;
                 foreach (Shield shield in GetComponents<Shield>())
                 {
-                    if (chosenShield == null || shield.time < chosenShield.time && shield.shieldAmount > 0)
+                    if (chosenShield == null || shield.duration < chosenShield.duration && shield.shieldAmount > 0)
                     {
                         chosenShield = shield;
                     }
