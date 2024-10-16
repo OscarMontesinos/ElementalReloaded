@@ -52,7 +52,7 @@ MonoBehaviour:
   description: 
   sprite: {fileID: 0}
   cd: 4
-  element: 7
+  element: 3
   type: 1
   anim: Special
   moveObject: {fileID: 3214125622143865836, guid: 269c64fbbe46c94438376652b12e850c, type: 3}

@@ -31,7 +31,7 @@ public class Stampede : Move
         GameObject particle = Instantiate(moveObject, user.transform);
         particle.transform.position = user.transform.position;
 
-        StartCoroutine(user.Dash(user.pointer.transform.up, spd, range));
+        StartCoroutine(user.Dash(user.pointer.transform.up, spd, range,false,false));
 
         while (!user.dashing)
         {

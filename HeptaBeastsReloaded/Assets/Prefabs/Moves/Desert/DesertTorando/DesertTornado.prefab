@@ -47,11 +47,12 @@ MonoBehaviour:
   user: {fileID: 0}
   cast: 1
   lockPointer: 1
+  resetAutoattack: 0
   mName: Desert Tornado
   description: 
   sprite: {fileID: 21300000, guid: 317957108cc827a4fb4c3658b2eb4f10, type: 3}
   cd: 12
-  element: 4
+  element: 1
   type: 1
   anim: Special
   moveObject: {fileID: 3214125622143865836, guid: 73c7c2bc223d1af49bcbaae8d8fb5092, type: 3}
@@ -60,4 +61,4 @@ MonoBehaviour:
   duration: 4.5
   area: 8
   spd: 4
-  slow: 30
+  slow: 25

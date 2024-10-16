@@ -16,7 +16,7 @@ public class StompObject : MonoBehaviour
     {
         if (active)
         {
-            Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(user.transform.position, area, GameManager.Instance.unitLayer);
+            Collider2D[] enemiesHit = Physics2D.OverlapCircleAll(transform.position, area, GameManager.Instance.unitLayer);
             PjBase enemy;
             foreach (Collider2D enemyColl in enemiesHit)
             {

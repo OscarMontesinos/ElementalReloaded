@@ -52,7 +52,7 @@ MonoBehaviour:
   description: 
   sprite: {fileID: 0}
   cd: 1.2
-  element: 4
+  element: 1
   type: 0
   anim: Basic
   moveObject: {fileID: 3214125622143865836, guid: 68ec49bc8919fd74d845db054b5b9492, type: 3}

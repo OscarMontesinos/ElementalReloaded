@@ -47,11 +47,12 @@ MonoBehaviour:
   user: {fileID: 0}
   cast: 1
   lockPointer: 1
+  resetAutoattack: 0
   mName: Arching Spark
   description: 
   sprite: {fileID: 0}
   cd: 1.35
-  element: 7
+  element: 3
   type: 1
   anim: Basic
   moveObject: {fileID: 3214125622143865836, guid: e084d34c1d8684b4d9fcff8f1b164415, type: 3}

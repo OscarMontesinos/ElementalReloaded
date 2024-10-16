@@ -10,6 +10,7 @@ using UnityEditor.SceneManagement;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering;
 using UnityEngine.TextCore.Text;
 using static UnityEngine.GraphicsBuffer;
 using static UnityEngine.UI.CanvasScaler;
@@ -36,6 +37,9 @@ public class IABase : MonoBehaviour
     public Vector2 targetLastPosition;
     [HideInInspector]
     public float averageRange;
+
+    float waitingTime = 0.5f;
+    float movePatience = 2;
     private void Awake()
     {
         user = GetComponent<PjBase>();
@@ -61,6 +65,7 @@ public class IABase : MonoBehaviour
 
     public virtual void Start()
     {
+        user.UIManager.gameObject.SetActive(false);
         StartCoroutine(PostStart());
     }
 
@@ -85,6 +90,8 @@ public class IABase : MonoBehaviour
         {
             agent.speed = 0;
         }
+
+
         if(enemiesOnSight.Contains(targetLocked))
         {
             if (targetLocked != null)
@@ -93,6 +100,98 @@ public class IABase : MonoBehaviour
             }
         }
 
+        if (user.walk && agent.isOnNavMesh && agent.remainingDistance > 0)
+        {
+            user.animator.SetFloat("FrontVelocity", 2);
+        }
+        else if(user.walk)
+        {
+            user.animator.SetFloat("FrontVelocity", 0);
+        }
+
+    }
+
+
+    public virtual IEnumerator IA()
+    {
+        CheckTargetsOnSight();
+        if (!targetLocked)
+        {
+            GetClosestEnemy();
+        }
+
+        if (targetLocked)
+        {
+
+            if (GetDistanceToTarget(targetLocked) > averageRange)
+            {
+                Vector2 dest = targetLocked.transform.position - ((targetLocked.transform.position - user.transform.position).normalized * (agentAcceptanceRadius - 1));
+                SetDestination(dest);
+                while (GetRemainingDistance(averageRange) && targetLocked != null)
+                {
+                    dest = targetLocked.transform.position - ((targetLocked.transform.position - user.transform.position).normalized * (agentAcceptanceRadius - 1));
+                    SetDestination(dest);
+                    PointTo(targetLocked);
+                    yield return null;
+                }
+            }
+            else
+            {
+                Vector2 dir = PivotPos();
+                SetDestination(dir);
+                while (GetRemainingDistance(averageRange) && targetLocked != null)
+                {
+                    SetDestination(dir);
+                    yield return null;
+                }
+            }
+
+            CheckTargetsOnSight();
+            if (enemiesOnSight.Contains(targetLocked))
+            {
+                List<MoveInfo> moveList = GetAvailableMoves();
+
+                if (moveList.Count > 1)
+                {
+                    MoveInfo randomMove = moveList[Random.Range(0, moveList.Count)];
+
+                    yield return StartCoroutine(ChooseAttack(randomMove));
+
+
+                }
+            }
+            else if (enemiesOnSight.Count == 0)
+            {
+                SetDestination(targetLastPosition);
+                yield return null;
+                while (targetLocked != null && !enemiesOnSight.Contains(targetLocked) && GetRemainingDistance(agentAcceptanceRadius))
+                {
+                    CheckTargetsOnSight();
+                    yield return null;
+                }
+                if (!enemiesOnSight.Contains(targetLocked))
+                {
+                    targetLocked = null;
+                }
+            }
+
+        }
+        else
+        {
+            SetDestination(GameManager.Instance.waypoints[Random.Range(0, GameManager.Instance.waypoints.Count)].transform.position);
+            while (agent.remainingDistance > agentAcceptanceRadius && enemiesOnSight.Count == 0)
+            {
+                CheckTargetsOnSight();
+                yield return null;
+            }
+            if (enemiesOnSight.Count > 0)
+            {
+                SetDestination(transform.position);
+            }
+        }
+
+        yield return null;
+        StartCoroutine(IA());
     }
 
     public void CheckTargetsOnSight()
@@ -104,31 +203,38 @@ public class IABase : MonoBehaviour
             {
                 if (unit.team != user.team)
                 {
-                    var dir = unit.transform.position - transform.position;
-                    if (!Physics2D.Raycast(transform.position, dir, dir.magnitude, GameManager.Instance.wallLayer))
+                    if (unit.revealedByList.Count == 0)
                     {
-                        if (Physics2D.Raycast(transform.position, dir, dir.magnitude, GameManager.Instance.playerWallLayer))
+                        var dir = unit.transform.position - transform.position;
+                        if (!Physics2D.Raycast(transform.position, dir, dir.magnitude, GameManager.Instance.wallLayer))
                         {
-                            Barrier barrier = Physics2D.Raycast(transform.position, dir, dir.magnitude, GameManager.Instance.playerWallLayer).rigidbody.gameObject.GetComponent<Barrier>();
-                            if (barrier.user.team != user.team && barrier.deniesVision && enemiesOnSight.Contains(unit))
+                            if (Physics2D.Raycast(transform.position, dir, dir.magnitude, GameManager.Instance.playerWallLayer))
                             {
-                               
+                                Barrier barrier = Physics2D.Raycast(transform.position, dir, dir.magnitude, GameManager.Instance.playerWallLayer).rigidbody.gameObject.GetComponent<Barrier>();
+                                if (barrier.user.team != user.team && barrier.deniesVision && enemiesOnSight.Contains(unit))
+                                {
+
+                                }
+                                else if (!enemiesOnSight.Contains(unit))
+                                {
+                                    enemiesOnSight.Add(unit);
+                                }
                             }
-                            else if(!enemiesOnSight.Contains(unit))
+                            else if (!enemiesOnSight.Contains(unit))
                             {
+
                                 enemiesOnSight.Add(unit);
                             }
                         }
-                        else if(!enemiesOnSight.Contains(unit))
+                        else if (enemiesOnSight.Contains(unit))
                         {
 
-                            enemiesOnSight.Add(unit);
+
                         }
                     }
-                    else if(enemiesOnSight.Contains(unit))
+                    else
                     {
-
-                       
+                        enemiesOnSight.Add(unit);
                     }
                 }
             }
@@ -199,8 +305,15 @@ public class IABase : MonoBehaviour
         Vector2 targetDist = target.transform.position - transform.position;
         return targetDist.magnitude;
     }
-
     public void PointTo(PjBase target)
+    {
+        if (target != null)
+        {
+            PointTo(target.gameObject);
+        }
+    }
+
+    public void PointTo(GameObject target)
     {
         if (!user.lockPointer)
         {
@@ -216,7 +329,7 @@ public class IABase : MonoBehaviour
     public bool GetRemainingDistance(float range)
     {
         bool isInDistance = true;
-        if (!user.dashing)
+        if (user!= null && agent.isOnNavMesh)
         {
             if(agent.remainingDistance < range)
             {
@@ -228,7 +341,7 @@ public class IABase : MonoBehaviour
 
     public void SetDestination(Vector2 pos)
     {
-        if (!user.dashing)
+        if (user != null && agent.isOnNavMesh)
         {
             NavMeshHit hit;
             NavMesh.SamplePosition(pos, out hit, 100, 1);
@@ -257,10 +370,13 @@ public class IABase : MonoBehaviour
     {
         yield return null;
     }
-
     public void UseAttack(MoveInfo move)
     {
-        switch (move.moveSlot)
+        UseAttack(move.moveSlot);
+    }
+    public void UseAttack(int move)
+    {
+        switch (move)
         {
             case 0:
                 StartCoroutine(user.MainAttack());
@@ -293,6 +409,30 @@ public class IABase : MonoBehaviour
                 return null;
         }
 
+    }
+
+    public GameObject GetRandomWaypoint()
+    {
+        return GameManager.Instance.waypoints[Random.Range(0, GameManager.Instance.waypoints.Count)];
+    }
+
+
+    public IEnumerator GetOnRange(float range)
+    {
+        if (targetLocked != null)
+        {
+            SetDestination(targetLocked.transform.position);
+            movePatience = 2;
+            while (targetLocked != null && GetRemainingDistance(range) && movePatience > 0)
+            {
+                movePatience -= Time.deltaTime;
+                SetDestination(targetLocked.transform.position);
+                PointTo(targetLocked);
+                yield return null;
+            }
+            PointTo(targetLocked);
+            yield return null;
+        }
     }
 }
 

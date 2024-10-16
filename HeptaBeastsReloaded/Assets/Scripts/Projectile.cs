@@ -9,8 +9,7 @@ public class Projectile : MonoBehaviour
     public PjBase user;
     [HideInInspector]
     public PjBase target;
-    [HideInInspector]
-    public bool lookAtTarget;
+    bool lookAtTarget = true;
     [HideInInspector]
     public HitData.Element element;
     [HideInInspector]
@@ -59,7 +58,6 @@ public class Projectile : MonoBehaviour
         {
             Vector2 dir = target.transform.position - transform.position;
             transform.up = dir;
-            lookAtTarget = false;
         }
     }
     public virtual void FixedUpdate()
@@ -92,6 +90,11 @@ public class Projectile : MonoBehaviour
         {
             Die();
         }
+    }
+
+    public void StopTrackingTarget()
+    {
+        lookAtTarget = false;
     }
 
     public virtual void Die()

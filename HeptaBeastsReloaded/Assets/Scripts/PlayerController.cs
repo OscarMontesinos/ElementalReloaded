@@ -202,7 +202,7 @@ public class PlayerController : MonoBehaviour
                 character.pointer.transform.up = dir;
             }
         }
-        else
+        else if(rb.velocity.magnitude > 1)
         {
              character.pointer.transform.up = rb.velocity.normalized;
         }
@@ -231,21 +231,24 @@ public class PlayerController : MonoBehaviour
 
     void HandleHabilities()
     {
-        if (Input.GetMouseButton(0))
+        if (character.stunTime <= 0)
         {
-           StartCoroutine(character.MainAttack());
-        }
-        if (Input.GetMouseButton(1))
-        {
-            StartCoroutine(character.Hab1());
-        }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            StartCoroutine(character.Hab2());
-        }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            StartCoroutine(character.Hab3());
+            if (Input.GetMouseButton(0))
+            {
+                StartCoroutine(character.MainAttack());
+            }
+            if (Input.GetMouseButton(1))
+            {
+                StartCoroutine(character.Hab1());
+            }
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                StartCoroutine(character.Hab2());
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                StartCoroutine(character.Hab3());
+            }
         }
     }
 

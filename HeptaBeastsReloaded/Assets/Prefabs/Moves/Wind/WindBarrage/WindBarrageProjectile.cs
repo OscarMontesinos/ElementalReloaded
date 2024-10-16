@@ -6,6 +6,20 @@ public class WindBarrageProjectile : Projectile
 {
     public GameObject exlodeParticle;
     float area;
+    float delay;
+    public override void Update()
+    {
+        base.Update();
+        if(delay < 0.75f)
+        {
+            delay += Time.deltaTime;
+        }
+        else
+        {
+            StopTrackingTarget();
+        }
+    }
+
     public override void NormalSetUp(PjBase user, HitData.Element element, PjBase.AttackType type, float dmg, float speed, float range)
     {
         base.NormalSetUp(user, element, type, dmg, speed, range);

@@ -52,7 +52,7 @@ MonoBehaviour:
   description: 
   sprite: {fileID: 21300000, guid: 9abaca007ad39eb4aa2f6c8f26de1ad2, type: 3}
   cd: 5
-  element: 4
+  element: 1
   type: 0
   anim: Burst
   moveObject: {fileID: 3134566558226164440, guid: b9475e4cdcbacda42a2931e141d4b3ba, type: 3}

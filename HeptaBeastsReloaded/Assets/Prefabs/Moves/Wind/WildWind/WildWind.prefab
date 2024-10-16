@@ -47,11 +47,12 @@ MonoBehaviour:
   user: {fileID: 0}
   cast: 0
   lockPointer: 0
+  resetAutoattack: 0
   mName: Wild Wind
   description: 
   sprite: {fileID: 21300000, guid: 107a98adb14e3294b9d2de0a800f5423, type: 3}
   cd: 10
-  element: 5
+  element: 4
   type: 2
   anim: Special
   moveObject: {fileID: 3214125622143865836, guid: b149bbf47c7c0014fb94efb69ecb74dd, type: 3}
@@ -59,15 +60,16 @@ MonoBehaviour:
   reducedCdTime: 2
   duration: 3
   statsToChange:
+    lvl: 0
     mHp: 0
     hp: 0
     healthRegen: 0
     shield: 0
     strength: 0
     sinergy: 0
-    atSpd: 0
     control: 0
-    cdr: 0
     fResist: 0
     mResist: 0
     spd: 22.5
+    atSpd: 0
+    cdr: 0

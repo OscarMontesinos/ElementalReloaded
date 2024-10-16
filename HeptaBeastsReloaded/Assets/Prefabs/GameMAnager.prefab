@@ -47,10 +47,14 @@ MonoBehaviour:
   gamemode: 0
   baseController: {fileID: 2297667835147027760, guid: cce1037fca2ba254f82fd7e01faafc19, type: 3}
   baseUIManager: {fileID: 3160418526335597406, guid: 9951dc35b407f974db774e7f02674eaa, type: 3}
+  waypoints: []
   pjList: []
   wallLayer:
     serializedVersion: 2
     m_Bits: 8
+  airLayer:
+    serializedVersion: 2
+    m_Bits: 64
   unitLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -80,8 +84,8 @@ MonoBehaviour:
   lightningColor:
     serializedVersion: 2
     rgba: 4287488999
-  bloodColor:
+  crystalColor:
     serializedVersion: 2
-    rgba: 4280229786
+    rgba: 4293695719
   FoV: {fileID: 15680838488341122, guid: 59016fa050b749949a070cc5c2391425, type: 3}
   ingameSpeed: 1

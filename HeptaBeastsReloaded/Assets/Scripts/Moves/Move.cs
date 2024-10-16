@@ -26,5 +26,9 @@ public class Move : MonoBehaviour
             user.currentBasicCd = 0;
         }
     }
+    public virtual void EndAnim()
+    {
+        
+    }
 
 }

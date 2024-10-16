@@ -13,90 +13,6 @@ public class IAStorminn : IABase
         base.Start();
         StartCoroutine(IA());
     }
-    IEnumerator IA()
-    {
-        CheckTargetsOnSight();
-        if (!targetLocked)
-        {
-            GetClosestEnemy();
-        }
-
-        if (targetLocked)
-        {
-
-            if(GetDistanceToTarget(targetLocked) > averageRange)
-            {
-                Vector2 dest = targetLocked.transform.position - ((targetLocked.transform.position - user.transform.position).normalized * (agentAcceptanceRadius - 1));
-                SetDestination(dest);
-                while (GetRemainingDistance(averageRange))
-                {
-                    dest = targetLocked.transform.position - ((targetLocked.transform.position - user.transform.position).normalized * (agentAcceptanceRadius - 1));
-                    SetDestination(dest);
-                    PointTo(targetLocked);
-                    yield return null;
-                }
-                yield return new WaitForSeconds(1);
-            }
-            else
-            {
-                Vector2 dir = PivotPos();
-                SetDestination(dir);
-                while (GetRemainingDistance(averageRange))
-                {
-                    SetDestination(dir);
-                    yield return null;
-                }
-                yield return new WaitForSeconds(1);
-            }
-
-            CheckTargetsOnSight();
-            if (enemiesOnSight.Contains(targetLocked))
-            {
-                List<MoveInfo> moveList = GetAvailableMoves();
-
-                if (moveList.Count > 1)
-                {
-                    MoveInfo randomMove = moveList[Random.Range(0, moveList.Count)];
-
-                    yield return StartCoroutine(ChooseAttack(randomMove));
-
-                   
-                }
-                yield return new WaitForSeconds(0.5f);
-            }
-            else if(enemiesOnSight.Count == 0)
-            {
-                SetDestination(targetLastPosition);
-                yield return null;
-                while (targetLocked != null && !enemiesOnSight.Contains(targetLocked) && agent.remainingDistance > agentAcceptanceRadius)
-                {
-                    CheckTargetsOnSight();
-                    yield return null;
-                }
-                if (!enemiesOnSight.Contains(targetLocked))
-                {
-                    targetLocked = null;
-                }
-            }
-
-        }
-        else
-        {
-            SetDestination(GameManager.Instance.waypoints[Random.Range(0, GameManager.Instance.waypoints.Count)].transform.position);
-            while (agent.remainingDistance > agentAcceptanceRadius && enemiesOnSight.Count == 0)
-            {
-                CheckTargetsOnSight();
-                yield return null;
-            }
-            if (enemiesOnSight.Count > 0)
-            {
-                SetDestination(transform.position);
-            }
-        }
-
-        yield return null;
-        StartCoroutine(IA());
-    }
 
     public override IEnumerator ChooseAttack(MoveInfo move)
     {
@@ -107,18 +23,23 @@ public class IAStorminn : IABase
             switch (move.moveName)
             {
                 case "Desert Breeze":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 1));
                     UseAttack(move);
                     break;
                 case "Air Pulse":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 1));
                     UseAttack(move);
                     break;
                 case "Cloud Burst":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 1));
                     UseAttack(move);
                     break;
                 case "Desert Tornado":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 1));
                     UseAttack(move);
                     break;
                 case "Djinn Eye":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range));
                     UseAttack(move);
                     break;
                 case "Wild Wind":
@@ -128,6 +49,7 @@ public class IAStorminn : IABase
                     }
                     break;
                 case "Wind Barrage":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 1));
                     UseAttack(move);
                     break;
                 case "Sand Veil":

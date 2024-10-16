@@ -42,6 +42,11 @@ public class MeleeHit : MonoBehaviour
         }
     }
 
+    public virtual void UnparentOnEndAnim()
+    {
+        transform.parent = null;
+    }
+
 
     private void OnDrawGizmos()
     {

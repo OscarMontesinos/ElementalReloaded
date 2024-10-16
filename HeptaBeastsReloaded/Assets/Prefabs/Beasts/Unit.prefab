@@ -120,7 +120,7 @@ Transform:
   m_GameObject: {fileID: 7185100018732391839}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5669, y: 0.5669, z: 0.5669}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5007679203624076267}
@@ -274,12 +274,13 @@ MonoBehaviour:
   lookAtPointer: 0
   pointer: {fileID: 1505266543011812747}
   cursor: {fileID: 1039217363961670490}
-  element1: 0
-  element2: 0
+  element1: 8
+  element2: 8
   spinObjects: {fileID: 0}
   hpBar: {fileID: 7122665078970364933}
   stunnBar: {fileID: 5453161705773703036}
   shieldBar: {fileID: 7293701595343349}
+  learnableMoves: []
   moveContainer: {fileID: 6375187341225054092}
   moveBasic: {fileID: 0}
   move1: {fileID: 0}
@@ -305,12 +306,12 @@ MonoBehaviour:
     shield: 0
     strength: 40
     sinergy: 40
-    atSpd: 1
     control: 40
-    cdr: 0
     fResist: 30
     mResist: 30
     spd: 8
+    atSpd: 1
+    cdr: 0
   damageTextOffset: 1
   dmgDealed: 0
   hide: 0

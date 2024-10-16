@@ -17,12 +17,13 @@ public class Stats
     
     public float strength;
     public float sinergy;
-    public float atSpd;
     public float control;
-    public float cdr;
 
     public float fResist;
     public float mResist;
 
     public float spd;
+
+    public float atSpd;
+    public float cdr;
 }

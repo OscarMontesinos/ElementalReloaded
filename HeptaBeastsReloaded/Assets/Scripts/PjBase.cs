@@ -404,16 +404,16 @@ public class PjBase : MonoBehaviour, TakeDamage
     }
 
     public static float[][] typesChart =
-   { //                       WAT GR    CR     TH   WI  ICE   NAT  FIR
-       /*Neutral*/ new float[]{ 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f,},
-       /*Wat*/ new float[]{ 0f, 0f, 0f, 0.3f, -0.3f, 0f, -0.3f, 0f, 0.3f},
-       /*Gro*/ new float[]{ 0f, 0f, 0f, -0.3f, 0f, 0.3f, 0.3f, -0.3f, 0f},
-       /*Cry*/ new float[]{ 0f, -0.3f, 0.3f, 0f, 0.3f, 0f, 0f, -0.3f, 0f},
-       /*Thu*/ new float[]{ 0f, 0.3f, 0f, -0.3f, 0f, 0.3f, 0f, 0f, -0.3f},
-       /*Win*/ new float[]{ 0f, 0f, -0.3f, 0f, -0.3f, 0f, 0f, 0.3f, 0.3f},
-       /*Ice*/ new float[]{ 0f, 0.3f, -0.3f, 0f, 0f, 0f, 0f, 0.3f, -0.3f },
-       /*Nat*/ new float[]{ 0f, 0f, 0.3f, 0.3f, 0f, -0.3f, -0.3f, 0f, 0f},
-       /*Fir*/ new float[]{ 0f, -0.3f, 0f, 0f, 0.3f, -0.3f, 0.3f, 0f, 0f}
+   { //                       WAT GR    CR     TH   WI  ICE   NAT  FIR   NEUT
+       /*Wat*/ new float[]{ 0f, 0f, 0.3f, -0.3f, 0f, -0.3f, 0f, 0.3f, 0f},
+       /*Gro*/ new float[]{ 0f, 0f, -0.3f, 0f, 0.3f, 0.3f, -0.3f, 0f, 0f},
+       /*Cry*/ new float[]{ -0.3f, 0.3f, 0f, 0.3f, 0f, 0f, -0.3f, 0f, 0f},
+       /*Thu*/ new float[]{ 0.3f, 0f, -0.3f, 0f, 0.3f, 0f, 0f, -0.3f, 0f},
+       /*Win*/ new float[]{ 0f, -0.3f, 0f, -0.3f, 0f, 0f, 0.3f, 0.3f, 0f},
+       /*Ice*/ new float[]{ 0.3f, -0.3f, 0f, 0f, 0f, 0f, 0.3f, -0.3f , 0f},
+       /*Nat*/ new float[]{ 0f, 0.3f, 0.3f, 0f, -0.3f, -0.3f, 0f, 0f, 0f},
+       /*Fir*/ new float[]{ -0.3f, 0f, 0f, 0.3f, -0.3f, 0.3f, 0f, 0f, 0f },
+       /*Neutral*/ new float[]{ 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f, 0f}
     };
 
     void TakeDamage.TakeDamage(PjBase user,float value, HitData.Element element, AttackType type)
@@ -458,11 +458,17 @@ public class PjBase : MonoBehaviour, TakeDamage
                     dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
                     dText.textColor = GameManager.Instance.lightningColor;
                     break;
+                case HitData.Element.crystal:
+                    dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                    dText.textColor = GameManager.Instance.crystalColor;
+                    break;
             }
         }
 
         float effectivenessMultiplier = 1;
         effectivenessMultiplier += typesChart[(int)element][(int)element1] + typesChart[(int)element][(int)element2];
+
+        
 
         value *= effectivenessMultiplier;
 
@@ -506,6 +512,10 @@ public class PjBase : MonoBehaviour, TakeDamage
             }*/
         }
 
+        if(effectivenessMultiplier < 0.4f)
+        {
+            effectivenessMultiplier = 0.4f;
+        }
 
         if (dText != null)
         {
@@ -595,6 +605,10 @@ public class PjBase : MonoBehaviour, TakeDamage
                     case HitData.Element.lightning:
                         dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
                         dText.textColor = GameManager.Instance.lightningColor;
+                        break;
+                    case HitData.Element.crystal:
+                        dText = Instantiate(GameManager.Instance.damageText, transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(damageTextOffset - 0.5f, damageTextOffset + 0.5f), 0), transform.rotation).GetComponent<DamageText>();
+                        dText.textColor = GameManager.Instance.crystalColor;
                         break;
                 }
 
@@ -690,10 +704,10 @@ public class PjBase : MonoBehaviour, TakeDamage
         yield return null;
         if (this != null)
         {
-            StartCoroutine(Dash(direction, speed, range, false));
+            StartCoroutine(Dash(direction, speed, range, false,true));
         }
     }
-    public virtual IEnumerator Dash(Vector2 direction, float speed, float range, bool ignoreWalls)
+    public virtual IEnumerator Dash(Vector2 direction, float speed, float range, bool ignoreWalls, bool ignoreAir)
     {
         if (dashing)
         {
@@ -712,9 +726,22 @@ public class PjBase : MonoBehaviour, TakeDamage
         GetComponent<Collider2D>().isTrigger = true;
 
         dashing = true;
-        Vector2 destinyPoint = Physics2D.Raycast(transform.position, direction, range, GameManager.Instance.wallLayer).point;
+        Vector2 destinyPoint = new Vector2(0, 0);
+        if (ignoreAir && !ignoreWalls)
+        {
+            destinyPoint = Physics2D.Raycast(transform.position, direction, range, GameManager.Instance.wallLayer).point;
+        }
+        else if (!ignoreAir && ignoreWalls)
+        {
+            destinyPoint = Physics2D.Raycast(transform.position, direction, range, GameManager.Instance.airLayer).point;
+        }
+        else if (!ignoreAir && !ignoreWalls)
+        {
+            destinyPoint = Physics2D.Raycast(transform.position, direction, range, GameManager.Instance.airLayer + GameManager.Instance.wallLayer).point;
+        }
+
         yield return null;
-        if (destinyPoint == new Vector2(0, 0))
+        if (destinyPoint == new Vector2(0, 0) )
         {
             destinyPoint = new Vector2(transform.position.x, transform.position.y) + direction.normalized * range;
         }
@@ -787,4 +814,5 @@ public class PjBase : MonoBehaviour, TakeDamage
     {
 
     }
+
 }

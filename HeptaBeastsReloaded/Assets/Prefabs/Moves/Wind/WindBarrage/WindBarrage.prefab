@@ -47,11 +47,12 @@ MonoBehaviour:
   user: {fileID: 0}
   cast: 1
   lockPointer: 1
+  resetAutoattack: 0
   mName: Wind Barrage
   description: 
   sprite: {fileID: 21300000, guid: 30f161532cda8b8479f5bae993619943, type: 3}
   cd: 8
-  element: 5
+  element: 4
   type: 1
   anim: Burst
   moveObject: {fileID: 3214125622143865836, guid: 50e9f9717d3831f40a1dfae92e868695, type: 3}

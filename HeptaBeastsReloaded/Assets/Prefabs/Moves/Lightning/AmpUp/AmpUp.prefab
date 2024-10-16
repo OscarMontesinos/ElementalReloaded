@@ -47,11 +47,12 @@ MonoBehaviour:
   user: {fileID: 0}
   cast: 1
   lockPointer: 1
-  mName: AmpUp
+  resetAutoattack: 0
+  mName: Amp Up
   description: 
   sprite: {fileID: 21300000, guid: 10523bd131cdc82499ee00149f1848a0, type: 3}
   cd: 5
-  element: 7
+  element: 3
   type: 2
   anim: Special
   moveObject: {fileID: 3214125622143865836, guid: 86b89f3a1b5ff9d468bc380438599b1e, type: 3}
@@ -65,12 +66,12 @@ MonoBehaviour:
     shield: 0
     strength: 0
     sinergy: 50
-    atSpd: 0
     control: 0
-    cdr: 0
     fResist: 0
     mResist: 0
     spd: 0
+    atSpd: 0
+    cdr: 0
   spd: 25
   particleFx: {fileID: 8878432131878806945, guid: 13060e9876fba7843ac9909f5b4176e7, type: 3}
   currentBuff: {fileID: 0}

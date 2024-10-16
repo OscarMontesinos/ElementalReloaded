@@ -176,6 +176,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8074388029933743320, guid: 5c60cc10c3d85614492357332a3908b9, type: 3}
+      propertyPath: element2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8074388029933743320, guid: 5c60cc10c3d85614492357332a3908b9, type: 3}
       propertyPath: learnableMoves.Array.data[1].move
       value: 
       objectReference: {fileID: 4176414129360914643, guid: cde7a6f357800784ba7c1cf827651a13, type: 3}

@@ -524,6 +524,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7185100018732391840, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185100018732391840, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185100018732391840, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185100018732391840, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -565,11 +577,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
       propertyPath: element1
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
       propertyPath: element2
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
       propertyPath: stats.hp
@@ -617,7 +629,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
       propertyPath: learnableMoves.Array.size
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
       propertyPath: learnableMoves.Array.data[0].move
@@ -647,9 +659,13 @@ PrefabInstance:
       propertyPath: learnableMoves.Array.data[6].move
       value: 
       objectReference: {fileID: 4176414129360914643, guid: ef1999f226577ef40beae6f3cabe7022, type: 3}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: learnableMoves.Array.data[7].move
+      value: 
+      objectReference: {fileID: 4176414129360914643, guid: 3b99152a2b8592348bc44a0413f6373b, type: 3}
     - target: {fileID: 7185100020070105985, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
       propertyPath: m_Radius
-      value: 1.1
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 7185100020070106109, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
       propertyPath: m_Name

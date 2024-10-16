@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public List<PjBase> pjList = new List<PjBase>();
 
     public LayerMask wallLayer;
+    public LayerMask airLayer;
     public LayerMask unitLayer;
     public LayerMask playerWallLayer;
 
@@ -37,7 +38,7 @@ public class GameManager : MonoBehaviour
     public Color32 natureColor;
     public Color32 windColor;
     public Color32 lightningColor;
-    public Color32 bloodColor;
+    public Color32 crystalColor;
 
     public GameObject FoV;
 

@@ -48,16 +48,17 @@ MonoBehaviour:
   user: {fileID: 0}
   cast: 1
   lockPointer: 1
+  resetAutoattack: 0
   mName: Stampede
   description: 
   sprite: {fileID: 21300000, guid: 8927f8d081275ba4a92be13c65efc9b6, type: 3}
   cd: 12
-  element: 4
+  element: 1
   type: 0
   anim: 
   moveObject: {fileID: 3134566558226164440, guid: 57c9d821ebbf5ba4c82434ee4b324e3a, type: 3}
   range: 14
-  spd: 25
+  spd: 17.5
   dmg: 35
   stunTime: 1
   area: 5

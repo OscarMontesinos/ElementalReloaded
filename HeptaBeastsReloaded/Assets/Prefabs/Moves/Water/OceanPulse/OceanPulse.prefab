@@ -47,11 +47,12 @@ MonoBehaviour:
   user: {fileID: 0}
   cast: 0
   lockPointer: 1
+  resetAutoattack: 0
   mName: OceanPulse
   description: 
   sprite: {fileID: 0}
   cd: 1.15
-  element: 3
+  element: 0
   type: 1
   anim: Basic
   moveObject: {fileID: 3214125622143865836, guid: b2de9aa7be351744aa3949c2967da7f4, type: 3}

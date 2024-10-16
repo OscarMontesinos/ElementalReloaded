@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4176414129360914645}
-  - component: {fileID: -601660017391600609}
+  - component: {fileID: -7668445888584836408}
   m_Layer: 0
   m_Name: SeaBless
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-601660017391600609
+--- !u!114 &-7668445888584836408
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,18 +41,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 4176414129360914643}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b19900e1e7eeaf47aa68f752c1c3baa, type: 3}
+  m_Script: {fileID: 11500000, guid: dabb35cf73fb5e0468347a9b08d44f7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   user: {fileID: 0}
   cast: 1
   lockPointer: 1
-  mName: SeaBless
+  resetAutoattack: 0
+  mName: Sea Bless
   description: 
-  sprite: {fileID: 21300000, guid: f924bd9c35165644898ed067b6dc6352, type: 3}
+  sprite: {fileID: 21300000, guid: 1d1b4b4a13682424ba74204d3251c892, type: 3}
   cd: 5
-  element: 3
-  type: 2
+  element: 0
+  type: 0
   anim: Special
   moveObject: {fileID: 3214125622143865836, guid: fc8d53e85118aba4fadfb8eaa881d40e, type: 3}
   range: 15
@@ -65,12 +66,12 @@ MonoBehaviour:
     shield: 0
     strength: 0
     sinergy: 0
-    atSpd: 0
     control: 0
-    cdr: 75
     fResist: 0
     mResist: 0
     spd: 0
+    atSpd: 0
+    cdr: 75
   spd: 25
   particleFx: {fileID: 8878432131878806945, guid: f9f74607f0aeb064cad8ac7621d1670f, type: 3}
   currentBuff: {fileID: 0}

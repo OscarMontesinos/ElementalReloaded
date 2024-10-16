@@ -47,11 +47,12 @@ MonoBehaviour:
   user: {fileID: 0}
   cast: 1
   lockPointer: 1
+  resetAutoattack: 0
   mName: Water Wave
   description: 
   sprite: {fileID: 21300000, guid: e58169e1eb5d9e34796d3f878278dac6, type: 3}
   cd: 9
-  element: 3
+  element: 0
   type: 1
   anim: Special
   moveObject: {fileID: 3214125622143865836, guid: d02fffff0550b85488ac414ffa309a4c, type: 3}
