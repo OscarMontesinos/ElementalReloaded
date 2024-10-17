@@ -51,7 +51,7 @@ MonoBehaviour:
   resetAutoattack: 0
   mName: DisablingDischarge
   description: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: dab39f6920ce6694ea85ac26ff117416, type: 3}
   cd: 9
   element: 3
   type: 1

@@ -52,7 +52,7 @@ MonoBehaviour:
   mName: Arching Spark
   description: 
   sprite: {fileID: 0}
-  cd: 1.35
+  cd: 1.55
   element: 3
   type: 1
   anim: Basic

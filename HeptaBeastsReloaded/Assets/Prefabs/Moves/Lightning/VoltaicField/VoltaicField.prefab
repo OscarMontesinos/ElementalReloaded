@@ -5048,7 +5048,7 @@ MonoBehaviour:
   moveObject: {fileID: 2686971881456909381}
   range: 9
   area: 9
-  dmg: 15
+  dmg: 10
   duration: 10
   shield: 70
   shieldPerHit: 7.5

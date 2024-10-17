@@ -51,7 +51,7 @@ MonoBehaviour:
   resetAutoattack: 0
   mName: Sand Blast
   description: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: c58ae1b67bd292d4480c047cb29c028c, type: 3}
   cd: 4
   element: 1
   type: 1
