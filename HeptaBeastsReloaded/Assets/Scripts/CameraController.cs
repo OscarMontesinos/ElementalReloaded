@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public static CameraController Instance;
     public GameObject fog;
     public PlayerController playerController;
     public float speed;
@@ -22,6 +23,16 @@ public class CameraController : MonoBehaviour
     void Awake()
     {
         zoomIn = cam.orthographicSize;
+
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void Start()
@@ -114,15 +125,6 @@ public class CameraController : MonoBehaviour
         else
         {
 
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                cam.orthographicSize += camDistance;
-                //rotateCamera = !rotateCamera;
-            }
-            if (Input.GetKeyUp(KeyCode.Space))
-            {
-                cam.orthographicSize -= camDistance;
-            }
 
             /*
             if (rotateCamera)
@@ -150,5 +152,17 @@ public class CameraController : MonoBehaviour
             }
             transform.GetChild(0).eulerAngles = new Vector3(0, 0, 0);*/
         }
+    }
+
+    public void PullBack()
+    {
+        Debug.Log("patras");
+        cam.orthographicSize += camDistance;
+       //rotateCamera = !rotateCamera;
+    }
+    public void PullForward()
+    {
+        Debug.Log("palante");
+        cam.orthographicSize -= camDistance;
     }
 }

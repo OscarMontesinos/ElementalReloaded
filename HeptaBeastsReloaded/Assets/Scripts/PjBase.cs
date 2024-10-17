@@ -240,7 +240,7 @@ public class PjBase : MonoBehaviour, TakeDamage
 
     public virtual IEnumerator MainAttack()
     {
-        if (currentBasicCd <= 0 && !casting)
+        if (currentBasicCd <= 0 && !casting && !dashing)
         {
             currentBasicCd = CalculateAtSpd(currentMoveBasic.cd * stats.atSpd);
             lockPointer = false;
@@ -264,7 +264,7 @@ public class PjBase : MonoBehaviour, TakeDamage
 
     public virtual IEnumerator Hab1()
     {
-        if (currentHab1Cd <= 0 && !casting)
+        if (currentHab1Cd <= 0 && !casting && !dashing)
         {
             currentHab1Cd = CDR(currentMove1.cd);
             lockPointer = false;
@@ -287,7 +287,7 @@ public class PjBase : MonoBehaviour, TakeDamage
 
     public virtual IEnumerator Hab2()
     {
-        if (currentHab2Cd <= 0 && !casting)
+        if (currentHab2Cd <= 0 && !casting && !dashing)
         {
             currentHab2Cd = CDR(currentMove2.cd);
             lockPointer = false;
@@ -310,7 +310,7 @@ public class PjBase : MonoBehaviour, TakeDamage
 
     public virtual IEnumerator Hab3()
     {
-        if (currentHab3Cd <= 0 && !casting)
+        if (currentHab3Cd <= 0 && !casting && !dashing)
         {
             currentHab3Cd = CDR(currentMove3.cd);
             lockPointer = false;

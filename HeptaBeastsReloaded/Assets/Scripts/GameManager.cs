@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     public float ingameSpeed;
 
     public bool spawn;
-    public GameObject waveSpawner;
+    public List<GameObject> waveSpawners;
 
     [Serializable]
     public struct Wave
@@ -83,6 +83,7 @@ public class GameManager : MonoBehaviour
         {
             foreach (GameObject unit in waves[Random.Range(0,waves.Count)].enemies)
             {
+                GameObject waveSpawner = GetWaveSpawner();
                 GameObject enemy = Instantiate(unit, waveSpawner.transform.position, waveSpawner.transform.rotation);
                 currentWave.Add(enemy);
             }
@@ -105,6 +106,7 @@ public class GameManager : MonoBehaviour
 
             foreach (GameObject unit in waves[Random.Range(0, waves.Count)].enemies)
             {
+                GameObject waveSpawner = GetWaveSpawner();
                 GameObject enemy = Instantiate(unit, waveSpawner.transform.position, waveSpawner.transform.rotation);
                 currentWave.Add(enemy);
             }
@@ -117,5 +119,29 @@ public class GameManager : MonoBehaviour
         angleInDegrees += eulerY;
         Vector3 angle = new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
         return new Vector2(-angle.x,angle.z);
+    }
+
+    public GameObject GetWaveSpawner()
+    {
+        float maxRange = 0;
+        float range = 0;
+        GameObject selectedSpawner = null;
+        foreach (GameObject spawner in waveSpawners)
+        {
+            foreach (PjBase pj in pjList)
+            {
+                range = 0;
+                range += (spawner.transform.position - pj.transform.position).magnitude;
+            }
+
+
+            if (spawner == null || range > maxRange)
+            {
+                selectedSpawner = spawner;
+                maxRange = range;
+            }
+        }
+
+        return selectedSpawner;
     }
 }

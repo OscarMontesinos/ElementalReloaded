@@ -58,6 +58,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CancelAimingAssistant",
+                    "type": "Button",
+                    "id": "42ce0fe8-42be-4e0e-a26c-535d6918c35d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "b0bcb8fd-3870-4a5b-bf1a-c52ffd53d323",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PullBackCamera",
+                    "type": "Button",
+                    "id": "27e0ddc4-a3d0-436d-ad1e-c3d7a03fb0de",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -223,6 +250,61 @@
                     "processors": "",
                     "groups": "",
                     "action": "Cursor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f8506494-0a67-4208-9ffe-fe20c3e46344",
+                    "path": "<HID::BDA NSW wired controller>/button2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CancelAimingAssistant",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8ba57d5c-5c17-4e52-8c53-f20246c774f4",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a733cfe7-8201-453d-ae70-6f234ed3efc2",
+                    "path": "<HID::BDA NSW wired controller>/button10",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "41de91ae-30f8-4705-9348-a0dcd7304aa6",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PullBackCamera",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6a4f34f9-a868-4a44-92e5-616173f0b812",
+                    "path": "<HID::BDA NSW wired controller>/button5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PullBackCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

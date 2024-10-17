@@ -32,18 +32,20 @@ public class UIManager : MonoBehaviour
 
         UpdateHabIndicators();
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        
+    }
+
+    public void Pause()
+    {
+        if (Time.timeScale == 0)
         {
-            if(Time.timeScale == 0)
-            {
-                Time.timeScale = GameManager.Instance.ingameSpeed;
-                pauseMenu.SetActive(false);
-            }
-            else
-            {
-                Time.timeScale = 0;
-                pauseMenu.SetActive(true);
-            }
+            Time.timeScale = GameManager.Instance.ingameSpeed;
+            pauseMenu.SetActive(false);
+        }
+        else
+        {
+            Time.timeScale = 0;
+            pauseMenu.SetActive(true);
         }
     }
 

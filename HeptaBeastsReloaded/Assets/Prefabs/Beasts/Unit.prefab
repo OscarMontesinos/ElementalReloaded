@@ -552,6 +552,54 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 5b3f3994-8fb8-4e8c-9c8c-05bd45addf95
     m_ActionName: Gameplay/Cursor[/BDA NSW wired controller/stick]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7185100020070106111}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: ChangeAimingAssistance
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 42ce0fe8-42be-4e0e-a26c-535d6918c35d
+    m_ActionName: Gameplay/CancelAimingAssistant[/BDA NSW wired controller/hat/up]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7185100020070106111}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Pause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b0bcb8fd-3870-4a5b-bf1a-c52ffd53d323
+    m_ActionName: Gameplay/Pause[/Keyboard/escape,/BDA NSW wired controller/button10]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7185100020070106111}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: PullBackCamera
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 27e0ddc4-a3d0-436d-ad1e-c3d7a03fb0de
+    m_ActionName: Gameplay/PullBackCamera[/Keyboard/space,/BDA NSW wired controller/trigger]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay

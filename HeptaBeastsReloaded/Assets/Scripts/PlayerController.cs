@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
     float maxViewportDistance = 16;
     public SpriteRenderer cursorSprite;
 
+    bool camPulledBack;
+    bool aimingAssistance = true;
+
     bool moveBasic;
     bool move1;
     bool move2;
@@ -233,51 +236,54 @@ public class PlayerController : MonoBehaviour
             character.cursor.transform.position = character.cursor.transform.position + (character.pointer.transform.up * 1.5f);
         }
 
-        Vector2 dir = character.cursor.transform.position - character.transform.position;
-
-        RaycastHit2D[] ray = Physics2D.CircleCastAll((Vector2)character.transform.position + (dir.normalized*6), 6, dir.normalized, maxRange-6, GameManager.Instance.unitLayer, -10, 100);
-
-        PjBase target = null;
-        int times = 0;
-
-        foreach (RaycastHit2D rayHit in ray)
+        if (aimingAssistance)
         {
-            if (target == null || target == character)
+            Vector2 dir = character.cursor.transform.position - character.transform.position;
+
+            RaycastHit2D[] ray = Physics2D.CircleCastAll((Vector2)character.transform.position + (dir.normalized * 4.5f), 4.5f, dir.normalized, maxRange - 6, GameManager.Instance.unitLayer, -10, 100);
+
+            PjBase target = null;
+            int times = 0;
+
+            foreach (RaycastHit2D rayHit in ray)
             {
-                target = rayHit.collider.GetComponent<PjBase>();
-                if (target == character || target.hide)
+                if (target == null || target == character)
                 {
-                    target = null;
-                }
-            }
-            else if (target != null)
-            {
-                Vector2 dist = target.transform.position - character.transform.position;
-
-                PjBase targetbackUp = target;
-                PjBase target2 = rayHit.collider.GetComponent<PjBase>();
-                Vector2 dist2 = target2.transform.position - character.transform.position;
-
-                if (!target2.hide)
-                {
-                    if (dist2.magnitude < dist.magnitude)
+                    target = rayHit.collider.GetComponent<PjBase>();
+                    if (target == character || target.hide)
                     {
-                        target = target2;
-                    }
-
-
-                    if (target == character)
-                    {
-                        target = targetbackUp;
+                        target = null;
                     }
                 }
-            }
-            times++;
-        }
+                else if (target != null)
+                {
+                    Vector2 dist = target.transform.position - character.transform.position;
 
-        if (target != null && target != character)
-        {
-            character.cursor.transform.position = target.transform.position;
+                    PjBase targetbackUp = target;
+                    PjBase target2 = rayHit.collider.GetComponent<PjBase>();
+                    Vector2 dist2 = target2.transform.position - character.transform.position;
+
+                    if (!target2.hide)
+                    {
+                        if (dist2.magnitude < dist.magnitude)
+                        {
+                            target = target2;
+                        }
+
+
+                        if (target == character)
+                        {
+                            target = targetbackUp;
+                        }
+                    }
+                }
+                times++;
+            }
+
+            if (target != null && target != character)
+            {
+                character.cursor.transform.position = target.transform.position;
+            }
         }
     }
     void HandleCamera()
@@ -317,7 +323,30 @@ public class PlayerController : MonoBehaviour
     {
         move3 = ctx.action.triggered;
     }
-    void HandleHabilities()
+
+    public void PullBackCamera(InputAction.CallbackContext ctx)
+    {
+        camPulledBack = !camPulledBack;
+        if (camPulledBack)
+        {
+            CameraController.Instance.PullBack();
+        }
+        else
+        {
+            CameraController.Instance.PullForward();
+        }
+    }
+
+    public void Pause(InputAction.CallbackContext ctx)
+    {
+        character.UIManager.Pause();
+    }
+
+    public void ChangeAimingAssistance(InputAction.CallbackContext ctx)
+    {
+        aimingAssistance = !aimingAssistance;
+    }
+        void HandleHabilities()
     {
         if (character.stunTime <= 0)
         {
