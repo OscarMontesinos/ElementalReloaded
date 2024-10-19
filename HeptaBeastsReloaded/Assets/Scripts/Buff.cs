@@ -8,13 +8,19 @@ public class Buff : MonoBehaviour
     public PjBase user;
     [HideInInspector]
     public PjBase target;
+    public HitData.Element element;
     public float duration;
     [HideInInspector]
     public bool untimed;
     public Stats statsToChange;
     float spdThreshold = 15;
     public GameObject particleFx;
-
+    float regen;
+    public virtual void NormalSetUp(PjBase user, PjBase target, Stats statsToChange, float duration, GameObject particleFx, HitData.Element element)
+    {
+        this.element = element;
+        NormalSetUp(user, target, statsToChange, duration, particleFx);
+    }
     public virtual void NormalSetUp(PjBase user, PjBase target, Stats statsToChange,float duration, GameObject particleFx)
     {
         this.user = user;
@@ -22,6 +28,7 @@ public class Buff : MonoBehaviour
         this.duration = duration;
         this.statsToChange = statsToChange;
 
+        regen += this.statsToChange.healthRegen;
         target.stats.strength += this.statsToChange.strength;
         target.stats.sinergy += this.statsToChange.sinergy;
         target.stats.control += this.statsToChange.control;
@@ -73,6 +80,8 @@ public class Buff : MonoBehaviour
                 Die();
             }
         }
+
+        user.Heal(user,regen * Time.deltaTime, element);
     }
 
     public virtual void Die()

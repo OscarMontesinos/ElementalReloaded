@@ -61,6 +61,8 @@ public class IABase : MonoBehaviour
         user.MoveSetUp();
 
         averageRange = (user.currentMoveBasic.range + user.currentMove1.range + user.currentMove2.range + user.currentMove3.range) / 4;
+
+        user.rb.mass = 1000;
     }
 
     public virtual void Start()
@@ -84,7 +86,7 @@ public class IABase : MonoBehaviour
     {
         if (user.stunTime <= 0)
         {
-            agent.speed = user.stats.spd - 0.4F;
+            agent.speed = user.stats.spd - 1;
         }
         else
         {

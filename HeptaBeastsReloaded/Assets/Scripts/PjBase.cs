@@ -15,7 +15,8 @@ using Random = UnityEngine.Random;
 public class PjBase : MonoBehaviour, TakeDamage
 {
     public bool walk;
-    Rigidbody2D rb;
+    [HideInInspector]
+    public Rigidbody2D rb;
     public UIManager UIManager;
     [HideInInspector]
     public GameManager manager;
@@ -38,6 +39,7 @@ public class PjBase : MonoBehaviour, TakeDamage
     public Slider hpBar;
     public Slider stunnBar;
     public Slider shieldBar;
+    public TextMeshProUGUI hpBarText;
 
     [Serializable]
     public struct LearnableMove
@@ -141,6 +143,8 @@ public class PjBase : MonoBehaviour, TakeDamage
 
             shieldBar.value = stats.shield;
             shieldBar.maxValue = stats.mHp;
+
+            hpBarText.text = stats.hp.ToString("F0");
         }
         if (hide && revealedByList.Count == 0)
         {
@@ -667,6 +671,10 @@ public class PjBase : MonoBehaviour, TakeDamage
     {
         if (this.stunTime < stunTime)
         {
+            if (controller)
+            {
+                stunTime /= 3;
+            }
             this.stunTime = stunTime;
         }
     }

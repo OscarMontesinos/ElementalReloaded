@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4176414129360914645}
-  - component: {fileID: -2394429563657332436}
+  - component: {fileID: -4160782492522803050}
   m_Layer: 0
-  m_Name: OceanPulse
+  m_Name: FrostBreath
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-2394429563657332436
+--- !u!114 &-4160782492522803050
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,22 +41,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 4176414129360914643}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dab090707afa234ea1a4929460e1bc3, type: 3}
+  m_Script: {fileID: 11500000, guid: b5e03632c00feb341a2d1fa5823e5051, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   user: {fileID: 0}
   cursorAffecter: 0
-  cast: 0
+  cast: 1
   lockPointer: 1
-  resetAutoattack: 0
-  mName: Ocean Pulse
+  resetAutoattack: 1
+  mName: Frost Breath
   description: 
-  sprite: {fileID: 0}
-  cd: 1.15
-  element: 0
+  sprite: {fileID: 21300000, guid: 3d25bfae784330f49b60f38fab8e1c65, type: 3}
+  cd: 8
+  element: 5
   type: 1
-  anim: Basic
-  moveObject: {fileID: 3214125622143865836, guid: b2de9aa7be351744aa3949c2967da7f4, type: 3}
-  range: 15
-  dmg: 20
-  spd: 12.5
+  anim: Burst
+  moveObject: {fileID: 8878432131878806945, guid: f4a7ff3635dd1d94080c712df7fb2a4c, type: 3}
+  range: 7
+  dmg: 30
+  stunTime: 3
+  angle: 90

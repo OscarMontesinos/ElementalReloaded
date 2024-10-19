@@ -9,10 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4176414129360914645}
-  - component: {fileID: -7647563537560469153}
-  - component: {fileID: 3441505719318893826}
+  - component: {fileID: 7776376106302724040}
   m_Layer: 0
-  m_Name: Stampede
+  m_Name: IcyGlide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-7647563537560469153
+--- !u!114 &7776376106302724040
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,41 +42,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 4176414129360914643}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e156fbbe4c20c3740849b46fa3188823, type: 3}
+  m_Script: {fileID: 11500000, guid: ffe0afa08aa5c9946af8f8dcbc337ea5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   user: {fileID: 0}
   cursorAffecter: 0
   cast: 1
   lockPointer: 1
-  resetAutoattack: 0
-  mName: Stampede
+  resetAutoattack: 1
+  mName: IcyGlide
   description: 
-  sprite: {fileID: 21300000, guid: 8927f8d081275ba4a92be13c65efc9b6, type: 3}
-  cd: 12
-  element: 1
+  sprite: {fileID: 21300000, guid: dac6c4d3ba569fe47b30d58501fb50fc, type: 3}
+  cd: 8
+  element: 5
   type: 0
   anim: 
-  moveObject: {fileID: 3134566558226164440, guid: 57c9d821ebbf5ba4c82434ee4b324e3a, type: 3}
-  range: 14
-  spd: 17.5
-  dmg: 35
-  stunTime: 1.75
-  area: 5
+  moveObject: {fileID: 3214125622143865836, guid: 6f386c05a9e674846903dfff82dc23ca, type: 3}
+  range: 10
+  spd: 22.5
+  dmg: 30
+  area: 4
   areaShower: {fileID: 4674237510946588972}
---- !u!114 &3441505719318893826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4176414129360914643}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69415830666298940b3c68c2568057cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  area: 5
 --- !u!1 &4674237510946588972
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,6 +73,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5292271184340773560}
   - component: {fileID: 907435156088962464}
+  - component: {fileID: 5395473161626491748}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -104,7 +90,7 @@ Transform:
   m_GameObject: {fileID: 4674237510946588972}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 8, y: 8, z: 8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4176414129360914645}
@@ -152,7 +138,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: 27041e6abedbd6942855942787ef4068, type: 3}
-  m_Color: {r: 0.3490566, g: 0.26484588, b: 0.18934675, a: 0.22745098}
+  m_Color: {r: 0.8349056, g: 0.9966635, b: 1, a: 0.22745098}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -162,3 +148,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5395473161626491748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4674237510946588972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69415830666298940b3c68c2568057cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  area: 4
