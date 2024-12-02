@@ -16,6 +16,8 @@ public class UIManager : MonoBehaviour
     public List<HabilityUIIndicator> habIndicators = new List<HabilityUIIndicator>();
 
     public GameObject pauseMenu;
+    public GameObject habIndicatorsGamepad;
+    public GameObject habIndicatorsKeyboard;
 
     public PjBase ch;
 
@@ -40,12 +42,14 @@ public class UIManager : MonoBehaviour
         if (Time.timeScale == 0)
         {
             Time.timeScale = GameManager.Instance.ingameSpeed;
-            pauseMenu.SetActive(false);
+            pauseMenu.SetActive(false); 
+            Cursor.visible = false;
         }
         else
         {
             Time.timeScale = 0;
             pauseMenu.SetActive(true);
+            Cursor.visible = true;
         }
     }
 
@@ -77,33 +81,53 @@ public class UIManager : MonoBehaviour
         if (ch.currentMove1)
         {
             habIndicators[0].UpdateImage(ch.currentMove1.sprite);
+            habIndicators[3].UpdateImage(ch.currentMove1.sprite);
         }
         if (ch.currentMove2)
         {
             habIndicators[1].UpdateImage(ch.currentMove2.sprite);
+            habIndicators[4].UpdateImage(ch.currentMove2.sprite);
         }
         if (ch.currentMove3)
         {
             habIndicators[2].UpdateImage(ch.currentMove3.sprite);
+            habIndicators[5].UpdateImage(ch.currentMove3.sprite);
         }
     }
 
 
     void UpdateHabIndicators()
     {
+        if (ch.controller)
+        {
+            if (ch.controller.isUsingGamepad)
+            {
+                habIndicatorsGamepad.SetActive(true);
+                habIndicatorsKeyboard.SetActive(false);
+            }
+            else
+            {
+                habIndicatorsKeyboard.SetActive(true);
+                habIndicatorsGamepad.SetActive(false);
+            }
+        }
+
         if (ch != null && ch.stats.hp > 0)
         {
             if (ch.currentMove1)
             {
                 habIndicators[0].UIUpdate(ch.currentMove1.cd, ch.currentHab1Cd);
+                habIndicators[3].UIUpdate(ch.currentMove1.cd, ch.currentHab1Cd);
             }
             if (ch.currentMove2)
             {
                 habIndicators[1].UIUpdate(ch.currentMove2.cd, ch.currentHab2Cd);
+                habIndicators[4].UIUpdate(ch.currentMove2.cd, ch.currentHab2Cd);
             }
             if (ch.currentMove3)
             {
                 habIndicators[2].UIUpdate(ch.currentMove3.cd, ch.currentHab3Cd);
+                habIndicators[5].UIUpdate(ch.currentMove3.cd, ch.currentHab3Cd);
             }
         }
     }

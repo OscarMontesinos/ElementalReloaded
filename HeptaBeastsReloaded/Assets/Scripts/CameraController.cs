@@ -156,13 +156,11 @@ public class CameraController : MonoBehaviour
 
     public void PullBack()
     {
-        Debug.Log("patras");
         cam.orthographicSize += camDistance;
        //rotateCamera = !rotateCamera;
     }
     public void PullForward()
     {
-        Debug.Log("palante");
         cam.orthographicSize -= camDistance;
     }
 }

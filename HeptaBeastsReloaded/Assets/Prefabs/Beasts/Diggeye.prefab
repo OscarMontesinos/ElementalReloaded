@@ -419,6 +419,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6448287680793676713, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7185100018732391839, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
       propertyPath: m_Name
       value: DiggeyeSprite
@@ -468,6 +472,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: move1
+      value: 
+      objectReference: {fileID: 4176414129360914643, guid: c9e6978398378ca409ea5ed3dcabfe6e, type: 3}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: move2
+      value: 
+      objectReference: {fileID: 4176414129360914643, guid: df666e24d70e9cb4497c6e35ef31070c, type: 3}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: move3
+      value: 
+      objectReference: {fileID: 4176414129360914643, guid: 10f4e5f4463d12a4ea18ee013f5dfc4d, type: 3}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
       propertyPath: element
       value: 4
       objectReference: {fileID: 0}
@@ -484,8 +500,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: moveBasic
+      value: 
+      objectReference: {fileID: 4176414129360914643, guid: 6c2add9d06c73c140880cfe043448a69, type: 3}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
       propertyPath: stats.cdr
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
+      propertyPath: stats.lvl
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7185100020070105984, guid: 8b3f640e1ab28104292574ee30b932fe, type: 3}
       propertyPath: stats.mHp

@@ -8,6 +8,7 @@ public class SandBlastProjectile : Projectile
     public float angle;
     public float area;
     float delay;
+    public PjBase targetHit;
     public override void Update()
     {
         base.Update();
@@ -31,6 +32,8 @@ public class SandBlastProjectile : Projectile
     {
         if (collision.CompareTag("Unit") && collision.GetComponent<PjBase>().team != user.team && !targetsAffected.Contains(collision.GetComponent<PjBase>()))
         {
+            collision.GetComponent<TakeDamage>().TakeDamage(user, dmg, element, type);
+            targetHit = collision.GetComponent<PjBase>();
             Die();
         }
         else if (collideWalls && collision.CompareTag("Wall"))
@@ -48,7 +51,7 @@ public class SandBlastProjectile : Projectile
         foreach (Collider2D enemyColl in enemiesHit)
         {
             enemy = enemyColl.GetComponent<PjBase>();
-            if (enemy.team != user.team)
+            if (enemy.team != user.team && enemy != targetHit)
             {
                 Transform target = enemy.transform;
                 Vector2 dir = target.position - transform.position;

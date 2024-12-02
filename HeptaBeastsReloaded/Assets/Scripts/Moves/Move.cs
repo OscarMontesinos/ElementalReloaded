@@ -32,4 +32,9 @@ public class Move : MonoBehaviour
         
     }
 
+    public virtual void OnStun()
+    {
+
+    }
+
 }

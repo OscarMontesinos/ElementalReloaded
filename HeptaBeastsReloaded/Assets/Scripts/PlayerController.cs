@@ -34,6 +34,9 @@ public class PlayerController : MonoBehaviour
 
     float maxRange;
 
+    [HideInInspector]
+    public bool isUsingGamepad;
+
     public void LockPointer(bool value)
     {
         lockPointer = value;
@@ -51,6 +54,9 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = false;
+
+
         Instantiate(GameManager.Instance.FoV, transform).GetComponent<FieldOfView>().team = character.team;
 
         StartCoroutine(PostStart());    
@@ -216,73 +222,86 @@ public class PlayerController : MonoBehaviour
 
     void HandlePointer()
     {
-        /*if (character.lookAtPointer)
+        if (!isUsingGamepad)
         {
-            if (!lockPointer && Time.timeScale != 0)
+            if (character.lookAtPointer)
             {
-                Vector2 dir = UtilsClass.GetMouseWorldPosition() - character.pointer.transform.position;
-                character.pointer.transform.up = dir;
+                if (!lockPointer && Time.timeScale != 0)
+                {
+                    Vector2 dir = UtilsClass.GetMouseWorldPosition() - character.pointer.transform.position;
+                    character.pointer.transform.up = dir;
+                }
             }
-        }
-        else*/ if(rb.velocity.magnitude > 1 && !character.lookAtPointer)
-        {
-             character.pointer.transform.up = rb.velocity.normalized;
-        }
-        //character.cursor.transform.position = UtilsClass.GetMouseWorldPosition();
-
-        character.cursor.transform.position = (Vector2)character.transform.position + (inputCursor * maxRange);
-        if(inputCursor.magnitude == 0)
-        {
-            character.cursor.transform.position = character.cursor.transform.position + (character.pointer.transform.up * 1.5f);
-        }
-
-        if (aimingAssistance)
-        {
-            Vector2 dir = character.cursor.transform.position - character.transform.position;
-
-            RaycastHit2D[] ray = Physics2D.CircleCastAll((Vector2)character.transform.position + (dir.normalized * 4.5f), 4.5f, dir.normalized, maxRange - 6, GameManager.Instance.unitLayer, -10, 100);
-
-            PjBase target = null;
-            int times = 0;
-
-            foreach (RaycastHit2D rayHit in ray)
+            else if (rb.velocity.magnitude > 1 && !character.lookAtPointer)
             {
-                if (target == null || target == character)
-                {
-                    target = rayHit.collider.GetComponent<PjBase>();
-                    if (target == character || target.hide)
-                    {
-                        target = null;
-                    }
-                }
-                else if (target != null)
-                {
-                    Vector2 dist = target.transform.position - character.transform.position;
-
-                    PjBase targetbackUp = target;
-                    PjBase target2 = rayHit.collider.GetComponent<PjBase>();
-                    Vector2 dist2 = target2.transform.position - character.transform.position;
-
-                    if (!target2.hide)
-                    {
-                        if (dist2.magnitude < dist.magnitude)
-                        {
-                            target = target2;
-                        }
-
-
-                        if (target == character)
-                        {
-                            target = targetbackUp;
-                        }
-                    }
-                }
-                times++;
+                character.pointer.transform.up = rb.velocity.normalized;
             }
 
-            if (target != null && target != character)
+            character.cursor.transform.position = UtilsClass.GetMouseWorldPosition();
+        }
+        else
+        {
+            if (rb.velocity.magnitude > 1 && !character.lookAtPointer)
             {
-                character.cursor.transform.position = target.transform.position;
+                character.pointer.transform.up = rb.velocity.normalized;
+            }
+
+
+
+            character.cursor.transform.position = (Vector2)character.transform.position + (inputCursor * maxRange);
+            if (inputCursor.magnitude == 0)
+            {
+                character.cursor.transform.position = character.cursor.transform.position + (character.pointer.transform.up * 1.5f);
+            }
+
+            if (aimingAssistance)
+            {
+                Vector2 dir = character.cursor.transform.position - character.transform.position;
+
+                RaycastHit2D[] ray = Physics2D.CircleCastAll((Vector2)character.transform.position + (dir.normalized * 4.5f), 4.5f, dir.normalized, maxRange - 6, GameManager.Instance.unitLayer, -10, 100);
+
+                PjBase target = null;
+                int times = 0;
+
+                foreach (RaycastHit2D rayHit in ray)
+                {
+                    if (target == null || target == character)
+                    {
+                        target = rayHit.collider.GetComponent<PjBase>();
+                        if (target == character || target.hide)
+                        {
+                            target = null;
+                        }
+                    }
+                    else if (target != null)
+                    {
+                        Vector2 dist = target.transform.position - character.transform.position;
+
+                        PjBase targetbackUp = target;
+                        PjBase target2 = rayHit.collider.GetComponent<PjBase>();
+                        Vector2 dist2 = target2.transform.position - character.transform.position;
+
+                        if (!target2.hide)
+                        {
+                            if (dist2.magnitude < dist.magnitude)
+                            {
+                                target = target2;
+                            }
+
+
+                            if (target == character)
+                            {
+                                target = targetbackUp;
+                            }
+                        }
+                    }
+                    times++;
+                }
+
+                if (target != null && target != character)
+                {
+                    character.cursor.transform.position = target.transform.position;
+                }
             }
         }
     }
@@ -307,21 +326,35 @@ public class PlayerController : MonoBehaviour
          }*/
     }
 
+    void CheckInput(string inputName)
+    {
+        isUsingGamepad = !(inputName == "Mouse" || inputName == "Keyboard");
+    }
+
     public void BasicMove(InputAction.CallbackContext ctx)
     {
         moveBasic = ctx.action.triggered;
+
+        CheckInput(ctx.action.activeControl.device.displayName);
     }
     public void Move1(InputAction.CallbackContext ctx)
     {
         move1 = ctx.action.triggered;
+
+        CheckInput(ctx.action.activeControl.device.displayName);
     }
     public void Move2(InputAction.CallbackContext ctx)
     {
         move2 = ctx.action.triggered;
+
+        CheckInput(ctx.action.activeControl.device.displayName);
+
     }
     public void Move3(InputAction.CallbackContext ctx)
     {
         move3 = ctx.action.triggered;
+
+        CheckInput(ctx.action.activeControl.device.displayName);
     }
 
     public void PullBackCamera(InputAction.CallbackContext ctx)
@@ -335,16 +368,22 @@ public class PlayerController : MonoBehaviour
         {
             CameraController.Instance.PullForward();
         }
+
+        CheckInput(ctx.action.activeControl.device.displayName);
     }
 
     public void Pause(InputAction.CallbackContext ctx)
     {
         character.UIManager.Pause();
+
+        CheckInput(ctx.action.activeControl.device.displayName);
     }
 
     public void ChangeAimingAssistance(InputAction.CallbackContext ctx)
     {
         aimingAssistance = !aimingAssistance;
+
+        CheckInput(ctx.action.activeControl.device.displayName);
     }
         void HandleHabilities()
     {
@@ -369,8 +408,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnMove(InputAction.CallbackContext ctx) => inputMov = ctx.ReadValue<Vector2>();
-    public void OnCursor(InputAction.CallbackContext ctx) => inputCursor = ctx.ReadValue<Vector2>();
+    public void OnMove(InputAction.CallbackContext ctx) 
+    {
+        inputMov = ctx.ReadValue<Vector2>();
+
+        CheckInput(ctx.action.activeControl.device.displayName);
+    }
+    public void OnCursor(InputAction.CallbackContext ctx) 
+    { 
+        inputCursor = ctx.ReadValue<Vector2>();
+
+        CheckInput(ctx.action.activeControl.device.displayName);
+    }
 
     void HandleMovement()
     {

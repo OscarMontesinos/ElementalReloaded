@@ -116,8 +116,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8074388029933743320, guid: 5c60cc10c3d85614492357332a3908b9, type: 3}
+      propertyPath: stats.lvl
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8074388029933743320, guid: 5c60cc10c3d85614492357332a3908b9, type: 3}
       propertyPath: controller
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8074388029933743320, guid: 5c60cc10c3d85614492357332a3908b9, type: 3}
+      propertyPath: stats.healthRegen
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8074388029933743271, guid: 5c60cc10c3d85614492357332a3908b9, type: 3}
@@ -128,7 +136,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8074388029933743269, guid: 5c60cc10c3d85614492357332a3908b9, type: 3}
   m_PrefabInstance: {fileID: 8604298438357539557}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4361303765422744657
+--- !u!114 &6623445930226306250
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,7 +145,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 532945335671207488}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84aae5e579b6a5f458c511fb34f2da19, type: 3}
+  m_Script: {fileID: 11500000, guid: 220f350d8e4cdc946b5c472463e032f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   user: {fileID: 0}

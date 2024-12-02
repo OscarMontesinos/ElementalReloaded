@@ -5052,7 +5052,7 @@ MonoBehaviour:
     lvl: 0
     mHp: 0
     hp: 0
-    healthRegen: 7.5
+    healthRegen: 6
     shield: 0
     strength: 0
     sinergy: 0
@@ -5060,5 +5060,5 @@ MonoBehaviour:
     fResist: 0
     mResist: 0
     spd: 0
-    atSpd: 1.15
+    atSpd: 0.7
     cdr: 0

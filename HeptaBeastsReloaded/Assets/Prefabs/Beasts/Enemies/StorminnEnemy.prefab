@@ -168,8 +168,16 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8074388029933743320, guid: 82954b91008afb24db079245a8aa8870, type: 3}
+      propertyPath: stats.lvl
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8074388029933743320, guid: 82954b91008afb24db079245a8aa8870, type: 3}
       propertyPath: controller
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8074388029933743320, guid: 82954b91008afb24db079245a8aa8870, type: 3}
+      propertyPath: stats.healthRegen
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8074388029933743271, guid: 82954b91008afb24db079245a8aa8870, type: 3}
@@ -202,7 +210,7 @@ NavMeshAgent:
   m_BaseOffset: 0.7
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7706210595785836582
+--- !u!114 &-319846573717064860
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -211,12 +219,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8782423954374131972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0011206eff559f94f98d2c54ab125c73, type: 3}
+  m_Script: {fileID: 11500000, guid: 220f350d8e4cdc946b5c472463e032f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   user: {fileID: 0}
   agent: {fileID: 0}
-  agentAcceptanceRadius: 0.5
+  agentAcceptanceRadius: 1.5
   availableBasicMoves:
   - {fileID: 4176414129360914643, guid: 84c0afcc3996c0645824bffb9bc840ee, type: 3}
   - {fileID: 4176414129360914643, guid: 7416764ce61fb1a4196a0fa8efc48e15, type: 3}

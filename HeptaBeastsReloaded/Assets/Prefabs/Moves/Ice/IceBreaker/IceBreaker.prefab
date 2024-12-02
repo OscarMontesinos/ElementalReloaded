@@ -57,7 +57,7 @@ MonoBehaviour:
   element: 5
   type: 0
   anim: 
-  moveObject: {fileID: 0}
+  moveObject: {fileID: 8878432131878806945, guid: a128ba0f50cf9f848bab475492c7c4bd, type: 3}
   range: 7
   spd: 25
   dmg1: 20

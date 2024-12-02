@@ -17,6 +17,8 @@ public class Projectile : MonoBehaviour
     [HideInInspector]
     public float dmg;
     [HideInInspector]
+    public float stunTime;
+    [HideInInspector]
     public float speed;
     [HideInInspector]
     public float spdOverTime;
@@ -39,7 +41,11 @@ public class Projectile : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         startPos = transform.position;
     }
-
+    public virtual void NormalSetUp(PjBase user, HitData.Element element, PjBase.AttackType type, float dmg, float speed, float range, float stunTime)
+    {
+        this.stunTime = stunTime;
+        NormalSetUp(user, element, type, dmg, speed, range);
+    }
     public virtual void NormalSetUp(PjBase user, HitData.Element element, PjBase.AttackType type, float dmg, float speed, float range)
     {
         this.user = user;
@@ -81,6 +87,10 @@ public class Projectile : MonoBehaviour
             PjBase target = collision.GetComponent<PjBase>();
             target.GetComponent<TakeDamage>().TakeDamage(user, dmg, element, type);
             targetsAffected.Add(target);
+            if (stunTime > 0)
+            {
+                user.Stunn(target, stunTime);
+            }
             if (!pierce)
             {
                 Die();

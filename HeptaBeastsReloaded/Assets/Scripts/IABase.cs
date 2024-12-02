@@ -69,6 +69,7 @@ public class IABase : MonoBehaviour
     {
         user.UIManager.gameObject.SetActive(false);
         StartCoroutine(PostStart());
+        StartCoroutine(IA());
     }
 
     public virtual IEnumerator PostStart()
@@ -94,7 +95,7 @@ public class IABase : MonoBehaviour
         }
 
 
-        if(enemiesOnSight.Contains(targetLocked))
+        if (enemiesOnSight.Contains(targetLocked))
         {
             if (targetLocked != null)
             {
@@ -106,7 +107,7 @@ public class IABase : MonoBehaviour
         {
             user.animator.SetFloat("FrontVelocity", 2);
         }
-        else if(user.walk)
+        else if (user.walk)
         {
             user.animator.SetFloat("FrontVelocity", 0);
         }
@@ -246,9 +247,9 @@ public class IABase : MonoBehaviour
     public void GetClosestEnemy()
     {
         targetLastPosition = new Vector2(1000, 1000);
-        foreach(PjBase unit in enemiesOnSight)
+        foreach (PjBase unit in enemiesOnSight)
         {
-            if(unit != null)
+            if (unit != null)
             {
                 Vector2 dir = unit.transform.position - transform.position;
                 if (dir.magnitude < targetLastPosition.magnitude)
@@ -267,31 +268,31 @@ public class IABase : MonoBehaviour
 
     public List<MoveInfo> GetAvailableMoves()
     {
-        
+
         List<MoveInfo> moves = new List<MoveInfo>();
 
-        if(user.currentBasicCd <= 0)
+        if (user.currentBasicCd <= 0)
         {
             MoveInfo info = new MoveInfo();
             info.moveName = user.currentMoveBasic.mName;
             info.moveSlot = 0;
             moves.Add(info);
         }
-        if(user.currentHab1Cd <= 0)
+        if (user.currentHab1Cd <= 0)
         {
             MoveInfo info = new MoveInfo();
             info.moveName = user.currentMove1.mName;
             info.moveSlot = 1;
             moves.Add(info);
         }
-        if(user.currentHab2Cd <= 0)
+        if (user.currentHab2Cd <= 0)
         {
             MoveInfo info = new MoveInfo();
             info.moveName = user.currentMove2.mName;
             info.moveSlot = 2;
             moves.Add(info);
         }
-        if(user.currentHab3Cd <= 0)
+        if (user.currentHab3Cd <= 0)
         {
             MoveInfo info = new MoveInfo();
             info.moveName = user.currentMove3.mName;
@@ -331,9 +332,9 @@ public class IABase : MonoBehaviour
     public bool GetRemainingDistance(float range)
     {
         bool isInDistance = true;
-        if (user!= null && agent.isOnNavMesh)
+        if (user != null && agent.isOnNavMesh)
         {
-            if(agent.remainingDistance < range)
+            if (agent.remainingDistance < range)
             {
                 isInDistance = false;
             }
@@ -348,7 +349,7 @@ public class IABase : MonoBehaviour
             NavMeshHit hit;
             NavMesh.SamplePosition(pos, out hit, 100, 1);
             agent.SetDestination(hit.position);
-            Debug.DrawLine(user.transform.position,hit.position);
+            Debug.DrawLine(user.transform.position, hit.position);
         }
     }
 
@@ -368,10 +369,6 @@ public class IABase : MonoBehaviour
         return dest;
     }
 
-    public virtual IEnumerator ChooseAttack(MoveInfo randomMove)
-    {
-        yield return null;
-    }
     public void UseAttack(MoveInfo move)
     {
         UseAttack(move.moveSlot);
@@ -434,6 +431,312 @@ public class IABase : MonoBehaviour
             }
             PointTo(targetLocked);
             yield return null;
+        }
+    }
+
+    public virtual IEnumerator ChooseAttack(MoveInfo move)
+    {
+        yield return null;
+        if (user.stunTime <= 0)
+        {
+            PointTo(targetLocked);
+            switch (move.moveName)
+            {
+                case "Slash":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range + 1.5f));
+                    UseAttack(move);
+                    break;
+                case "Blunt Blow":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range + 1.5f));
+                    UseAttack(move);
+                    break;
+                case "Piercing Strike":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range + 2));
+                    UseAttack(move);
+                    break;
+                case "Ground Mine":
+                    GameObject target = GetRandomWaypoint();
+                    SetDestination(target.transform.position);
+                    while (GetRemainingDistance(GetAttack(move).range))
+                    {
+                        SetDestination(target.transform.position);
+                        PointTo(target);
+                        yield return null;
+                    }
+                    PointTo(target);
+                    yield return null;
+                    UseAttack(move);
+                    break;
+                case "Underground Ambush":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 1));
+                    UseAttack(move);
+                    while (user.dashing)
+                    {
+                        yield return null;
+                    }
+                    PointTo(targetLocked);
+                    yield return null;
+                    UseAttack(0);
+                    break;
+                case "Wind Slash":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 1));
+                    UseAttack(move);
+                    while (user.dashing)
+                    {
+                        yield return null;
+                    }
+                    PointTo(targetLocked);
+                    yield return null;
+                    UseAttack(0);
+                    break;
+                case "Arching Spark":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 1));
+                    UseAttack(move);
+                    break;
+                case "Ocean Pulse":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 1));
+                    UseAttack(move);
+                    break;
+                case "Stomp":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 1));
+                    UseAttack(move);
+                    break;
+                case "Stampede":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 1));
+                    UseAttack(move);
+                    while (user.dashing)
+                    {
+                        yield return null;
+                    }
+                    PointTo(targetLocked);
+                    yield return null;
+                    UseAttack(0);
+                    break;
+                case "Electric Shot":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 1));
+                    UseAttack(move);
+                    break;
+                case "Disabling Discharge":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range));
+                    UseAttack(move);
+                    break;
+                case "Water Wave":
+                    SetDestination(targetLocked.transform.position);
+                    while (GetRemainingDistance(GetAttack(move).range - 3))
+                    {
+                        SetDestination(targetLocked.transform.position);
+                        PointTo(targetLocked);
+                        yield return null;
+                    }
+                    PointTo(targetLocked);
+                    yield return null;
+                    UseAttack(move);
+                    break;
+                case "Geiser":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range));
+                    UseAttack(move);
+                    break;
+                case "Amp Up":
+                    if (!GetAttack(move).GetComponent<AmpUp>().currentBuff)
+                    {
+                        PjBase target2 = null;
+                        foreach (PjBase ally in allies)
+                        {
+                            if (ally != null)
+                            {
+                                if (target2 != null)
+                                {
+                                    if (target2.stats.sinergy < ally.stats.sinergy)
+                                    {
+                                        target2 = ally;
+                                    }
+                                }
+                                else
+                                {
+                                    target2 = ally;
+                                }
+                            }
+                            else
+                            {
+                                target2 = user;
+                            }
+                        }
+                        SetDestination(target2.transform.position);
+                        while (GetRemainingDistance(GetAttack(move).range - 1) && target2 != null)
+                        {
+                            SetDestination(target2.transform.position);
+                            PointTo(target2);
+                            yield return null;
+                        }
+                        PointTo(target2);
+                        yield return null;
+                        UseAttack(move);
+                    }
+                    break;
+                case "Sea Bless":
+                    if (!GetAttack(move).GetComponent<SeaBless>().currentBuff)
+                    {
+                        PjBase target2 = null;
+                        float target2Highest = 0;
+                        foreach (PjBase ally in allies)
+                        {
+                            if (ally != null)
+                            {
+                                if (target2 != null)
+                                {
+                                    if (ally.stats.strength < ally.stats.sinergy)
+                                    {
+                                        if (target2Highest < ally.stats.sinergy)
+                                        {
+                                            target2 = ally;
+                                            target2Highest = ally.stats.sinergy;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (target2Highest < ally.stats.strength)
+                                        {
+                                            target2 = ally;
+                                            target2Highest = ally.stats.strength;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (ally.stats.strength < ally.stats.sinergy)
+                                    {
+                                        target2 = ally;
+                                        target2Highest = ally.stats.sinergy;
+                                    }
+                                    else
+                                    {
+                                        target2 = ally;
+                                        target2Highest = ally.stats.strength;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                target2 = user;
+                            }
+                        }
+                        SetDestination(target2.transform.position);
+                        while (GetRemainingDistance(GetAttack(move).range - 1) && target2 != null)
+                        {
+                            SetDestination(target2.transform.position);
+                            PointTo(target2);
+                            yield return null;
+                        }
+                        PointTo(target2);
+                        yield return null;
+                        UseAttack(move);
+                    }
+                    break;
+                case "Desert Breeze":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 1));
+                    UseAttack(move);
+                    break;
+                case "Air Pulse":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 1));
+                    UseAttack(move);
+                    break;
+                case "Cloud Burst":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 1));
+                    UseAttack(move);
+                    break;
+                case "Desert Tornado":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range + 6));
+                    UseAttack(move);
+                    break;
+                case "Djinn Eye":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range));
+                    UseAttack(move);
+                    break;
+                case "Wild Wind":
+                    if ((user.currentHab1Cd > 0 && user.currentHab2Cd > 0) || (user.currentHab3Cd > 0 && user.currentHab2Cd > 0) || (user.currentHab1Cd > 0 && user.currentHab3Cd > 0))
+                    {
+                        UseAttack(move);
+                    }
+                    break;
+                case "Sand Blast":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 1));
+                    UseAttack(move);
+                    break;
+                case "Sand Veil":
+                    if (!GetAttack(move).GetComponent<SandVeil>().currentBuff)
+                    {
+                        PjBase target2 = null;
+                        foreach (PjBase ally in allies)
+                        {
+                            if (ally != null)
+                            {
+                                if (target2 != null)
+                                {
+                                    if (target2.stats.hp < ally.stats.hp)
+                                    {
+                                        target2 = ally;
+                                    }
+                                }
+                                else
+                                {
+                                    target2 = ally;
+                                }
+                            }
+                            else
+                            {
+                                target2 = user;
+                            }
+                        }
+                        SetDestination(target2.transform.position);
+                        while (GetRemainingDistance(GetAttack(move).range - 1))
+                        {
+                            SetDestination(target2.transform.position);
+                            PointTo(target2);
+                            yield return null;
+                        }
+                        PointTo(target2);
+                        yield return null;
+                        UseAttack(move);
+                    }
+                    break;
+                case "Ice Claw":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 1));
+                    UseAttack(move);
+                    break;
+                case "Frost Blade":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range + 1));
+                    UseAttack(move);
+                    break;
+                case "Icy Glide":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range));
+                    UseAttack(move);
+                    break;
+                case "Berserk":
+                    UseAttack(move);
+                    break;
+                case "Ice Breaker":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 0.5f));
+                    UseAttack(move);
+                    break;
+                case "Shredding Spin":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 0.5f));
+                    UseAttack(move);
+                    SetDestination(targetLocked.transform.position);
+                    break;
+                case "Ice Shard Shield":
+                    UseAttack(move);
+                    break;
+                case "Water Shot":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 0.5f));
+                    UseAttack(move);
+                    break;
+                case "Freezing Shot":
+                    yield return StartCoroutine(GetOnRange(GetAttack(move).range - 0.5f));
+                    UseAttack(move);
+                    break;
+
+
+            }
         }
     }
 }

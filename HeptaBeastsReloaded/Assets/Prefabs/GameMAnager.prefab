@@ -90,7 +90,11 @@ MonoBehaviour:
   FoV: {fileID: 15680838488341122, guid: 59016fa050b749949a070cc5c2391425, type: 3}
   ingameSpeed: 1
   spawn: 1
-  waveSpawner: {fileID: 0}
+  waveSpawners:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   waves:
   - enemies:
     - {fileID: 3067878427793984926, guid: 1d2e150851867f94cb6fb67717ced5d6, type: 3}
@@ -100,4 +104,8 @@ MonoBehaviour:
     - {fileID: 3067878427793984926, guid: 1d2e150851867f94cb6fb67717ced5d6, type: 3}
     - {fileID: 2877856918372479675, guid: e36b6ca5b72fad445a42d7113035d0fd, type: 3}
     - {fileID: 8782423954374131972, guid: 512f9da0de6c1cf4a93e75a3e2af3780, type: 3}
+  - enemies:
+    - {fileID: 3578622738029404817, guid: 0ba742255f3b6fa4c9585458303ca718, type: 3}
+    - {fileID: 2815199514054945834, guid: f84bd536969c1514da0e3053d7618b70, type: 3}
+    - {fileID: 2815199514054945834, guid: f84bd536969c1514da0e3053d7618b70, type: 3}
   currentWave: []

@@ -502,7 +502,7 @@ public class PjBase : MonoBehaviour, TakeDamage
         {
             calculo = 0;
         }
-        value -= ((value * ((calculo / (100 + calculo) * 100))) / 100);
+        value *= 1- (calculo / (calculo + 20 + 1 *user.stats.lvl));
         float originalValue = value;
         if (controller != null)
         {
@@ -642,6 +642,10 @@ public class PjBase : MonoBehaviour, TakeDamage
     public virtual void Stunn(PjBase target, float value)
     {
         target.GetComponent<TakeDamage>().Stunn(value);
+
+        currentMove1.OnStun();
+        currentMove2.OnStun();
+        currentMove3.OnStun();
     }
 
     public virtual void OnGlobalStunn(PjBase target, float value)

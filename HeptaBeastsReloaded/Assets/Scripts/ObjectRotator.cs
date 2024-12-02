@@ -8,6 +8,6 @@ public class ObjectRotator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z + (spd * Time.deltaTime));
+        transform.eulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, transform.eulerAngles.z + (spd * Time.deltaTime));
     }
 }

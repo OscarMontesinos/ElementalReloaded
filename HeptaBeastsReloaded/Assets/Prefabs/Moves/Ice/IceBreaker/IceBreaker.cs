@@ -33,12 +33,6 @@ public class IceBreaker : Move
         }
 
         GameObject particle = null;
-        if (moveObject)
-        {
-            particle = Instantiate(moveObject, user.transform);
-            particle.transform.position = user.transform.position;
-            particle.transform.rotation = user.pointer.transform.rotation;
-        }
 
         StartCoroutine(user.Dash(user.pointer.transform.up, spd, range));
 
@@ -86,6 +80,8 @@ public class IceBreaker : Move
 
                             enemy.GetComponent<TakeDamage>().TakeDamage(user, dmg, element, type);
                             user.Stunn(enemy, stunTime);
+
+                            particle = Instantiate(moveObject, enemy.transform.position, user.pointer.transform.rotation);
 
                             user.dashing = false;
                         }
