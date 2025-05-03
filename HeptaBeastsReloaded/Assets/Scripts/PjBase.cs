@@ -502,7 +502,7 @@ public class PjBase : MonoBehaviour, TakeDamage
         {
             calculo = 0;
         }
-        value *= 1- (calculo / (calculo + 20 + 1 *user.stats.lvl));
+        value *= 1- (calculo / (calculo + 40 + 1 *user.stats.lvl));
         float originalValue = value;
         if (controller != null)
         {

@@ -25,6 +25,11 @@ public class UIManager : MonoBehaviour
     {
     }
 
+    private void Start()
+    {
+        pauseMenu.SetActive(false);
+    }
+
     private void Update()
     {
         if (ch != null)
